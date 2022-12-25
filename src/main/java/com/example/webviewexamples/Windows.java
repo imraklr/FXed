@@ -2,7 +2,6 @@ package com.example.webviewexamples;
 
 import javafx.scene.Node;
 
-import java.util.Collection;
 import java.util.PriorityQueue;
 
 @SuppressWarnings("ALL")
@@ -16,7 +15,7 @@ public abstract class Windows {
         // Initialising window index to zero
         winIdx = 0;
         // Number of windows must be a fixed
-        allWindows = new Windows[10];
+        allWindows = new Windows[1];
     }
 
     // In pixels(parent size)
@@ -24,11 +23,15 @@ public abstract class Windows {
     // default name
     protected String title = "WebView Demonstrations";
 
-    protected static final Collection<Node> get(int windowIndex, int untoPriority) {
+    protected static final PriorityQueue<Node> get(int windowIndex, int untoPriority) {
         // unto initial capacity - untoPriority
         PriorityQueue<Node> fixedReturn = new PriorityQueue<>(untoPriority);
-        var arr = allWindows[windowIndex].getWindowNodeComponents();
-        if (arr == null)
+        PriorityQueue<Node> arr = new PriorityQueue<>();
+        if (windowIndex <= allWindows.length && allWindows[windowIndex] != null)
+            allWindows[windowIndex].getWindowNodeComponents();
+        else
+            return null;
+        if (arr.isEmpty())
             return null;
         int iter = 0;
         Node removed = null;

@@ -14,6 +14,7 @@ class Window1 extends Windows {
     Window1() {
         // provide 'this' instance in the super class's allWindows array
         allWindows[winIdx++] = this;
+        windowNodeComponents = new PriorityQueue<>();
     }
 
     Window1(String title) {

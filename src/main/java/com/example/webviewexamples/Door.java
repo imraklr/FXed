@@ -4,20 +4,23 @@ import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
-import java.util.Collection;
+import java.util.PriorityQueue;
 
 public class Door extends Application {
+    private Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         Scene sc = new Scene(createContent());
 
         primaryStage.setScene(sc);
@@ -26,18 +29,24 @@ public class Door extends Application {
 
     private Parent createContent() {
         // Assume parent node to be a Pane
-        Pane p = new Pane();
+        TilePane titlePane = new TilePane();
         // Get all nodes for scene
-        Collection<? extends Node> collected = Windows.get(0, 1);
+        PriorityQueue<Node> collected = Windows.get(0, 1);
         if (collected == null) {
-            Label l = new Label();
-            l.setText("Window Creation Failed.");
-            HBox hBox = new HBox(l);
+            GridPane gridPane = new GridPane();
+            Label label = new Label();
+            label.setText("ERROR: WINDOW CREATION FAILED");
+            Button exit = new Button("EXIT");
+            exit.setOnMouseClicked(e -> {
+                // shutdown all threads before leaving and save any unsaved work
+                primaryStage.close();
+            });
+            gridPane.add(label, 0, 0);
+            gridPane.add(exit, 4, 11);
 
-            p.getChildren().add(hBox);
-            return p;
+            return gridPane;
         }
-        p.getChildren().addAll(collected);
-        return p;
+        titlePane.getChildren().addAll(collected);
+        return titlePane;
     }
 }
