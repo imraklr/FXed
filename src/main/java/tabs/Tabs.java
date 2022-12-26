@@ -60,7 +60,6 @@ public abstract class Tabs {
     }
 
     private static void createTabs() {
-        System.out.println("ENTERE");
         @SuppressWarnings("unused") Home ob1 = new Home(1);
     }
 
