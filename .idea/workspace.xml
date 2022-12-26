@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="">
+    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Added default behavior of the application if no parent(s) were found. It displays an error message &quot;ERROR: WINDOW CREATION FAILED&quot; with an &quot;EXIT&quot; button to exit from the application. Event 'e' in createContent() in exit.setOnMouse.... is half implemented as mentioned in the comment. Remove the comment or add new ones after certain feature implements.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/tabs/Tabs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tabs/defaults/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Windows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Windows.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/windows/Window1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/windows/Window1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Windows.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/windows/Window1.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -72,13 +81,32 @@
       <option name="project" value="LOCAL" />
       <updated>1672004123853</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added default behavior of the application if no parent(s) were found. It displays an error message &quot;ERROR: WINDOW CREATION FAILED&quot; with an &quot;EXIT&quot; button to exit from the application. Event 'e' in createContent() in exit.setOnMouse.... is half implemented as mentioned in the comment. Remove the comment or add new ones after certain feature implements.">
+      <created>1672007210211</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672007210211</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="Added default behavior of the application if no parent(s) were found. It displays an error message &quot;ERROR: WINDOW CREATION FAILED&quot; with an &quot;EXIT&quot; button to exit from the application. Event 'e' in createContent() in exit.setOnMouse.... is half implemented as mentioned in the comment. Remove the comment or add new ones after certain feature implements." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added default behavior of the application if no parent(s) were found. It displays an error message &quot;ERROR: WINDOW CREATION FAILED&quot; with an &quot;EXIT&quot; button to exit from the application. Event 'e' in createContent() in exit.setOnMouse.... is half implemented as mentioned in the comment. Remove the comment or add new ones after certain feature implements." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

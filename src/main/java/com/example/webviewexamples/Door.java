@@ -9,11 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
+import tabs.Tabs;
 
-import java.util.PriorityQueue;
+import java.util.Collection;
 
 public class Door extends Application {
     private Stage primaryStage;
+    private static TilePane parent;
     public static void main(String[] args) {
         launch(args);
     }
@@ -29,9 +31,10 @@ public class Door extends Application {
 
     private Parent createContent() {
         // Assume parent node to be a Pane
-        TilePane titlePane = new TilePane();
+        TilePane tilePane = new TilePane();
+        parent = tilePane;
         // Get all nodes for scene
-        PriorityQueue<Node> collected = Windows.get(0, 1);
+        Collection<Node> collected = Tabs.get(1);
         if (collected == null) {
             GridPane gridPane = new GridPane();
             Label label = new Label();
@@ -46,7 +49,11 @@ public class Door extends Application {
 
             return gridPane;
         }
-        titlePane.getChildren().addAll(collected);
-        return titlePane;
+        tilePane.getChildren().addAll(collected);
+        return tilePane;
+    }
+
+    public TilePane getParent() {
+        return parent;
     }
 }

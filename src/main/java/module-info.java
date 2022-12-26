@@ -3,4 +3,6 @@ module com.example.webviewexamples {
 
     opens com.example.webviewexamples to javafx.fxml;
     exports com.example.webviewexamples;
+    exports tabs;
+    opens tabs to javafx.fxml;
 }

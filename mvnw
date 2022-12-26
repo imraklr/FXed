@@ -256,7 +256,7 @@ else
           echo "Falling back to using Java to download"
         fi
         javaClass="$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.java"
-        # For Cygwin, switch paths to Windows format before running javac
+        # For Cygwin, switch paths to Tabs format before running javac
         if $cygwin; then
           javaClass=`cygpath --path --windows "$javaClass"`
         fi
@@ -288,7 +288,7 @@ if [ "$MVNW_VERBOSE" = true ]; then
 fi
 MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 
-# For Cygwin, switch paths to Windows format before running java
+# For Cygwin, switch paths to Tabs format before running java
 if $cygwin; then
   [ -n "$M2_HOME" ] &&
     M2_HOME=`cygpath --path --windows "$M2_HOME"`
@@ -301,7 +301,7 @@ if $cygwin; then
 fi
 
 # Provide a "standardized" way to retrieve the CLI args that will
-# work with both Windows and non-Windows executions.
+# work with both Tabs and non-Tabs executions.
 MAVEN_CMD_LINE_ARGS="$MAVEN_CONFIG $@"
 export MAVEN_CMD_LINE_ARGS
 
