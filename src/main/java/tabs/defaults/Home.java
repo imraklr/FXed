@@ -1,8 +1,8 @@
 package tabs.defaults;
 
 import javafx.scene.Node;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import tabs.Tabs;
 
 import java.util.ArrayList;
@@ -16,8 +16,11 @@ public class Home extends Tabs {
 
     @Override
     protected void UI() {
-        Rectangle rectangle = new Rectangle(100, 200, Paint.valueOf("#193458"));
-        components.add(rectangle);
+        WebView webView = new WebView();
+        WebEngine webEngine = webView.getEngine();
+        webEngine.load("https://www.stryve.online");
+
+        components.add(webView);
     }
 
     @Override
