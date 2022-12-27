@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import tabs.Tabs;
 
@@ -15,7 +15,7 @@ import java.util.Collection;
 
 public class Door extends Application {
     private Stage primaryStage;
-    private static TilePane parent;
+    private static Pane parent;
     public static void main(String[] args) {
         launch(args);
     }
@@ -31,8 +31,8 @@ public class Door extends Application {
 
     private Parent createContent() {
         // Assume parent node to be a Pane
-        TilePane tilePane = new TilePane();
-        parent = tilePane;
+        Pane pane = new Pane();
+        parent = pane;
         // Get all nodes for scene
         Collection<Node> collected = Tabs.get(1);
         if (collected == null) {
@@ -49,11 +49,11 @@ public class Door extends Application {
 
             return gridPane;
         }
-        tilePane.getChildren().addAll(collected);
-        return tilePane;
+        pane.getChildren().addAll(collected);
+        return pane;
     }
 
-    public TilePane getParent() {
+    public Pane getParent() {
         return parent;
     }
 }

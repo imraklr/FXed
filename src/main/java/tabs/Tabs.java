@@ -60,7 +60,7 @@ public abstract class Tabs {
     }
 
     private static void createTabs() {
-        @SuppressWarnings("unused") Home ob1 = new Home(1);
+        new Home(1);
     }
 
     public abstract ArrayList<Node> getComponents();

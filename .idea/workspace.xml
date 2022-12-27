@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="New module 'javafx.web' added through module-info.java">
+    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Some UI changes in the Home page(Home.java)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tabs/Tabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tabs/Tabs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tabs/defaults/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tabs/defaults/Home.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +77,7 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Door" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" nameIsGenerated="true">
+    <configuration name="Door" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.webviewexamples.Door" />
       <module name="WebViewExamples" />
       <method v="2">
@@ -121,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672129972455</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Some UI changes in the Home page(Home.java)">
+      <created>1672138209625</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672138209625</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,10 +160,22 @@
     <MESSAGE value="Second Commit with no super features" />
     <MESSAGE value="Added default behavior of the application if no parent(s) were found. It displays an error message &quot;ERROR: WINDOW CREATION FAILED&quot; with an &quot;EXIT&quot; button to exit from the application. Event 'e' in createContent() in exit.setOnMouse.... is half implemented as mentioned in the comment. Remove the comment or add new ones after certain feature implements." />
     <MESSAGE value="New module 'javafx.web' added through module-info.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="New module 'javafx.web' added through module-info.java" />
+    <MESSAGE value="Some UI changes in the Home page(Home.java)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some UI changes in the Home page(Home.java)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
