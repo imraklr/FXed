@@ -9,16 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Fixed the fixed view of browser in the Parent node.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/Dimens.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/Drags.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/Resizers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/interfaces/DefaultArraySize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" afterDir="false" />
+    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Some added functionalities and styled menu_strip.&#10;Features added - &#10;1) Window can be dragged by dragging rectangle(menu_strip)&#10;2) Dimens.java for keeping track of dimensions of various nodes&#10;3) doorAnims.java to keep animations related to door&#10;4) DefaultArraySize.java for storing default array size of relational nodes specified in Dimens.java&#10;5) doorDecoration.css for styling the Scene 'sc' and its elements&#10;6) Drags.java for keeping a watchdog over several drags in overall application&#10;7) Resizers.java for keeping an eye on resizing of several nodes and stage as well.&#10;&#10;NOTE: Some features may be considered for removal in the future version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/animations/doorAnims.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/animations/doorAnims.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tabs/Tabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tabs/Tabs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tabs/defaults/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tabs/defaults/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,22 +66,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/KIIT/Desktop/Rands/RandJav/year2023/justBeforeYear2023/WebViewExamples/src/main/java/com/example/webviewexamples",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.16091955",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/KIIT/Desktop/Rands/RandJav/year2023/justBeforeYear2023/WebViewExamples/src/main/java/com/example/webviewexamples&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.16091955&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\KIIT\Desktop\Rands\RandJav\year2023\justBeforeYear2023\WebViewExamples\src\main\java\com\example\webviewexamples" />
@@ -152,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672150874927</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Some added functionalities and styled menu_strip.&#10;Features added - &#10;1) Window can be dragged by dragging rectangle(menu_strip)&#10;2) Dimens.java for keeping track of dimensions of various nodes&#10;3) doorAnims.java to keep animations related to door&#10;4) DefaultArraySize.java for storing default array size of relational nodes specified in Dimens.java&#10;5) doorDecoration.css for styling the Scene 'sc' and its elements&#10;6) Drags.java for keeping a watchdog over several drags in overall application&#10;7) Resizers.java for keeping an eye on resizing of several nodes and stage as well.&#10;&#10;NOTE: Some features may be considered for removal in the future version">
+      <created>1672291278690</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672291278690</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,7 +187,9 @@
     <MESSAGE value="New module 'javafx.web' added through module-info.java" />
     <MESSAGE value="Some UI changes in the Home page(Home.java)" />
     <MESSAGE value="Fixed the fixed view of browser in the Parent node." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the fixed view of browser in the Parent node." />
+    <MESSAGE value="Some added functionalities and styled menu_strip.&#10;Features added - &#10;1) Window can be dragged by dragging rectangle(menu_strip)&#10;2) Dimens.java for keeping track of dimensions of various nodes&#10;3) doorAnims.java to keep animations related to door&#10;4) DefaultArraySize.java" />
+    <MESSAGE value="Some added functionalities and styled menu_strip.&#10;Features added - &#10;1) Window can be dragged by dragging rectangle(menu_strip)&#10;2) Dimens.java for keeping track of dimensions of various nodes&#10;3) doorAnims.java to keep animations related to door&#10;4) DefaultArraySize.java for storing default array size of relational nodes specified in Dimens.java&#10;5) doorDecoration.css for styling the Scene 'sc' and its elements&#10;6) Drags.java for keeping a watchdog over several drags in overall application&#10;7) Resizers.java for keeping an eye on resizing of several nodes and stage as well.&#10;&#10;NOTE: Some features may be considered for removal in the future version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some added functionalities and styled menu_strip.&#10;Features added - &#10;1) Window can be dragged by dragging rectangle(menu_strip)&#10;2) Dimens.java for keeping track of dimensions of various nodes&#10;3) doorAnims.java to keep animations related to door&#10;4) DefaultArraySize.java for storing default array size of relational nodes specified in Dimens.java&#10;5) doorDecoration.css for styling the Scene 'sc' and its elements&#10;6) Drags.java for keeping a watchdog over several drags in overall application&#10;7) Resizers.java for keeping an eye on resizing of several nodes and stage as well.&#10;&#10;NOTE: Some features may be considered for removal in the future version" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

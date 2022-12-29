@@ -1,5 +1,6 @@
 package com.example.webviewexamples;
 
+import animations.doorAnimations;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -46,6 +47,8 @@ public class Door extends Application {
         primaryStage.setScene(sc);
         primaryStage.show();
 
+        // Attach dimension class to nodes
+        attachDimensClass();
         // Attach dynamics
         doDynamics();
     }
@@ -92,8 +95,12 @@ public class Door extends Application {
         return pane;
     }
 
+    private void attachDimensClass() {
+    }
+
     private void doDynamics() {
         new Drags(m_strip, primaryStage);
+        new doorAnimations(m_strip, "");
     }
 
     public StackPane getParent() {
