@@ -2,6 +2,8 @@ package tabs.defaults;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.FontSmoothingType;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -21,13 +23,19 @@ public class Home extends Tabs {
     protected void UI() {
         WebView webView = new WebView();
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+        webView.setPageFill(Color.valueOf("#928378"));
         webView.setContextMenuEnabled(false); // When set false, right click option is disabled
         webView.setFontSmoothingType(FontSmoothingType.LCD); // Font Smoothing Type
-        webView.setPrefSize(screenBounds.getMaxX() - 50, screenBounds.getMaxY() - 50);
+        webView.setPrefSize(screenBounds.getMaxX() - 500, screenBounds.getMaxY() - 500);
         WebEngine webEngine = webView.getEngine();
         webEngine.load("https://www.google.com");
 
-        components.add(webView);
+        Rectangle rectangle = new Rectangle(10, 10);
+        rectangle.setTranslateX(100);
+        rectangle.setTranslateY(300);
+
+//        components.add(webView);
+        components.add(rectangle);
     }
 
     @Override

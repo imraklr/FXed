@@ -1,0 +1,12 @@
+.root {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 10;
+}
+
+#menu_strip {
+    /*                      from  point   to  point*/
+    /* -fx-fill: linear-gradient(from 0px 0px to 0px 0px, gray, darkgray 50%, dimgray 99%, white); */
+    -fx-fill: linear-gradient(from 0% 0% to 100% 100%, orange 20%, white 60%, green 100%);
+    -fx-arc-width: 14;
+    -fx-arc-height: 14;
+}

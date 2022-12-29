@@ -31,7 +31,11 @@ public abstract class Tabs {
         createTabs();
         if (tabs == null)
             return null;
-        return tabs.get(accessIndex).getComponents();
+        var c = tabs.get(accessIndex);
+        if (c != null)
+            return c.getComponents();
+        else
+            return null;
     }
 
     // TODO: Implement further methods to paint Parent node only
