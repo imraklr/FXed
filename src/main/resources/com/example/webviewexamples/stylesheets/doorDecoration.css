@@ -7,3 +7,15 @@
     -fx-arc-width: 14;
     -fx-arc-height: 14;
 }
+
+#minBtn {
+    -fx-opacity: 0.8
+}
+
+#maxBtn {
+    -fx-opacity: 0.8
+}
+
+#closeBtn {
+    -fx-opacity: 0.8
+}

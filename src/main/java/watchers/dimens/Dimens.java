@@ -1,128 +1,68 @@
 package watchers.dimens;
 
 import javafx.scene.Node;
-import watchers.dimens.interfaces.DefaultArraySize;
 
-// Supressing for now because a feature has to removed in the future version
-@SuppressWarnings("ALL")
 public class Dimens {
-    Node whichNode;
-    Dimens[] relations;
-    // Separations must be met only when it has some gap with parent/any node
-    double leftSeparation, rightSeparation, topSeparation,
-            bottomSeparation, sizeIn_x, sizeIn_y;
-    @Deprecated
-    double sizeIn_z;
-    double height, width; // For 3D
+    private Dimens relations;
+    private Dimens before_hinge, hinge, after_hinge;
+    private Node node;
+    private double[] v;
+    /*
+     * Formal Parameter 'v' is a vararg parameter which keeps note of the following:
+     * I)If node has 2D parameters, following are the possible parameters(in order):
+     *      v[0] = top                                  (separation value; POSITIVE/NEGATIVE)
+     *      v[1] = left                                 (separation value; POSITIVE/NEGATIVE)
+     *      v[2] = base                                 (separation value; POSITIVE/NEGATIVE)
+     *      v[3] = right                                (separation value; POSITIVE/NEGATIVE)
+     *      v[4] = angle in radians                          (angle; POSITIVE/NEGATIVE)
+     *      v[5] = x                                     (distance value; POSITIVE)
+     *      v[6] = y                                     (distance value; POSITIVE)
+     *      v[7] = z                                     (distance value; POSITIVE)
+     * II)If node has 3D parameters, following are the possible parameters(in order):
+     *      v[0] = top                                  (separation value; POSITIVE/NEGATIVE)
+     *      v[1] = left                                 (separation value; POSITIVE/NEGATIVE)
+     *      v[2] = base                                 (separation value; POSITIVE/NEGATIVE)
+     *      v[3] = right                                (separation value; POSITIVE/NEGATIVE)
+     *      v[4] = angle in steradians in 3D space      (separation value; POSITIVE/NEGATIVE)
+     *      v[5] = x                                     (distance value; POSITIVE)
+     *      v[6] = y                                     (distance value; POSITIVE)
+     *      v[7] = z                                     (distance value; POSITIVE)
+     */
 
-    public Dimens(Node whichNode, double leftSeparation,
-                  double rightSeparation, double topSeparation,
-                  double bottomSeparation, double sizeIn_x,
-                  double sizeIn_y, double sizeIn_z,
-                  @DefaultArraySize Dimens[] relations) {
-        this.whichNode = whichNode;
-        this.relations = relations;
-        this.leftSeparation = leftSeparation;
-        this.rightSeparation = rightSeparation;
-        this.topSeparation = topSeparation;
-        this.bottomSeparation = bottomSeparation;
-        this.sizeIn_z = sizeIn_z;
-        this.sizeIn_x = sizeIn_x;
-        this.sizeIn_y = sizeIn_y;
-
-        // For 2D, last two relations will be null
-        /*
-         * Sequence of elements in relations array:
-         * First element - top Node
-         * Second element - left Node
-         * Third element - bottom Node
-         * Fourth element - right Node
-         * Fifth element - back Node(3D)
-         * Sixth element - front Node(3D)
-         */
-
-        // Attach allChangeListeners
-        allChangeListeners_2D();
+    public Dimens() {
+        // Constructor used for creation of Dimensional Frame
+        relations = this;
     }
 
-    public Dimens(Node whichNode, double leftSeparation,
-                  double rightSeparation, double topSeparation,
-                  double bottomSeparation, double sizeIn_x,
-                  double sizeIn_y, double sizeIn_z, double height,
-                  double width, @DefaultArraySize Dimens[] relations) {
-        this.whichNode = whichNode;
-        this.relations = relations;
-        this.leftSeparation = leftSeparation;
-        this.rightSeparation = rightSeparation;
-        this.topSeparation = topSeparation;
-        this.bottomSeparation = bottomSeparation;
-        this.sizeIn_z = sizeIn_z;
-        this.sizeIn_x = sizeIn_x;
-        this.sizeIn_y = sizeIn_y;
-        this.height = height;
-        this.width = width;
-
-        /*
-         * Sequence of elements in relations array:
-         * First element - top Node
-         * Second element - left Node
-         * Third element - bottom Node
-         * Fourth element - right Node
-         * Fifth element - back Node(3D)
-         * Sixth element - front Node(3D)
-         */
-
-        // Attach allChangeListeners
-        allChangeListeners_3D();
+    public Dimens(Node node, Dimens intoRelation, double... v) throws Exception {
+        // The node with vararg array 'v' will be related with 'intoRelation' OR 'relations'
+        intoRelation.node = node;
+        intoRelation.v = v;
+        intoRelation.relate(node, v);
     }
 
-    private void allChangeListeners_2D() {
-        /*
-         * Relations have their own pre-assigned change listeners
-         * so assign change listeners to the incoming one(whichNode).
-         * If a change or specifically change in size in one node
-         * happens then all other nodes are affected in the current
-         * window(more accurately in its current parent).
-         */
-        /*
-         * IMP: If we don't change in Z-axis, there is no need of
-         * update in z-axis
-         */
-        // Listening for Resizes
-        whichNode.layoutXProperty().addListener((observableValue, number, t1) -> {
-            // Change all x's value accordingly
-            Node node;
-            for (Dimens d : relations)
-                if (d != null) {
-                    node = d.whichNode;
-                    node.setLayoutX(node.getLayoutX() + (double) number);
-                }
-        });
-        whichNode.layoutYProperty().addListener((observableValue, number, t1) -> {
-            // Change all y's value accordingly
-            Node node;
-            for (Dimens d : relations)
-                if (d != null) {
-                    node = d.whichNode;
-                    node.setLayoutY(node.getLayoutY() + (double) number);
-                }
-        });
-        // Listening for Translations
-        whichNode.translateXProperty().addListener((observableValue, number, t1) -> {
-
-        });
-        whichNode.translateYProperty().addListener((observableValue, number, t1) -> {
-
-        });
-        // TODO: Listening for Separations
-        // Future Feature: Drag Listeners
+    private void relate(Node node, double[] v) throws Exception {
+        if (!haveNegativeCoordinates(v))
+            if (hinge == null) {
+                relations = this;
+                hinge = relations;
+            } else
+                hinge.after_hinge = this;
+        else if (hinge != null)
+            hinge.before_hinge = this;
+        else {
+            Exception ex = new Exception("INSERTION OF NODES BEFORE " +
+                    "THE INSERTION OF HINGE NODES IS NOT ACCEPTED");
+            throw ex;
+        }
     }
 
-    public void allChangeListeners_3D() {
-
-    }
-
-    public Dimens getRelationalDimensions() {
-        return this;
+    private boolean haveNegativeCoordinates(double[] v) {
+        // Verify array 'v'
+        // NOTE: v[4] is angle which can be negative
+        for (int i = 0; i < v.length; i++)
+            if (v[i] < 0 && i != 4)
+                return true;
+        return false;
     }
 }
