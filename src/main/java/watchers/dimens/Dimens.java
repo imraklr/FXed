@@ -27,6 +27,11 @@ public class Dimens {
      *      v[5] = x                                     (distance value; POSITIVE)
      *      v[6] = y                                     (distance value; POSITIVE)
      *      v[7] = z                                     (distance value; POSITIVE)
+     * III)If node is a hinge node it contains four extra parameters(in order):
+     *      v[8]  = distance from top to boundary of visible scene       (distance value; POSITIVE)
+     *      v[9]  = distance from left to boundary of visible scene      (distance value; POSITIVE)
+     *      v[10] = distance from base to boundary of visible scene      (distance value; POSITIVE)
+     *      v[11] = distance from right to boundary of visible scene     (distance value; POSITIVE)
      */
 
     public Dimens() {
