@@ -4,6 +4,7 @@ import animations.doorAnimations;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,17 +23,13 @@ import watchers.dimens.Drags;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.LinkedList;
 
 public class Door extends Application {
     private Stage primaryStage;
     private static StackPane parent;
     private Rectangle m_strip; // menu_strip
-    private final LinkedList<Node> menuItems;
-
-    {
-        menuItems = new LinkedList<>();
-    }
+    private Group recent;
+    private Rectangle minimize, maximize, close;
 
     public static void main(String[] args) {
         launch(args);
@@ -55,7 +52,11 @@ public class Door extends Application {
         primaryStage.show();
 
         // Attach dimension class to nodes
-        attachDimensClass();
+        try {
+            attachDimensClass();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // Attach dynamics
         doDynamics();
     }
@@ -100,34 +101,54 @@ public class Door extends Application {
             menuStrip.setId("menu_strip");
             pane.getChildren().add(0, menuStrip);
         }
-        // min_max_close buttons
+        // min_max_close buttons(clickable rectangles)
         {
-            Button minBtn = new Button("-");
-            minBtn.setOnMouseClicked(e -> primaryStage.setIconified(true));
-            minBtn.setId("minBtn");
-            menuItems.add(minBtn);
-            Button maxBtn = new Button("^");
-            maxBtn.setOnMouseClicked(e -> primaryStage.setMaximized(true));
-            maxBtn.setId("maxBtn");
-            menuItems.add(maxBtn);
-            Button closeBtn = new Button("x");
-            closeBtn.setId("closeBtn");
-            closeBtn.setOnMouseClicked(e -> {
-                // shutdown all threads before leaving and save any unsaved work
-                primaryStage.close();
-            });
-            menuItems.add(closeBtn);
+            // Following three must be put in a triangular form
+            double recents_width = m_strip.getWidth() / 60;
+            double recents_height = m_strip.getHeight() / 10;
+            double recents_arc_height = 10 * recents_height / 2;
+            double recents_arc_width = 10 * recents_height / 2;
+            minimize = new Rectangle(recents_width, recents_height);
+            minimize.setTranslateX(150);
+            minimize.setTranslateY(10);
+            minimize.setRotate(-60);
+            maximize = new Rectangle(recents_width, recents_height);
+            maximize.setTranslateX(200);
+            maximize.setTranslateY(10);
+            maximize.setTranslateY(m_strip.getHeight() / 6);
+            close = new Rectangle(recents_width, recents_height);
+            close.setTranslateX(250);
+            close.setTranslateY(10);
+            close.setRotate(60);
 
-            closeBtn.setTranslateX(m_strip.getWidth() - 500);
+            Rectangle recent_1 = new Rectangle(recents_width, recents_height);
+            recent_1.setRotate(60);
+            recent_1.setArcHeight(recents_arc_height);
+            recent_1.setArcWidth(recents_arc_width);
+            Rectangle recent_2 = new Rectangle(recents_width, recents_height);
+            recent_2.setRotate(-60);
+            recent_2.setArcHeight(recents_arc_height);
+            recent_2.setArcWidth(recents_arc_width);
+            Rectangle recent_3 = new Rectangle(recents_width, recents_height);
+            recent_3.setTranslateY(-((Math.sqrt(3) / 4) * m_strip.getWidth() / 60));
+            recent_3.setArcHeight(recents_arc_height);
+            recent_3.setArcWidth(recents_arc_width);
+            recent = new Group(recent_1, recent_2, recent_3);
+            recent.getChildren().get(0).setTranslateX(-(recents_width / 4));
+            recent.getChildren().get(1).setTranslateX(recents_width / 4);
 
-            pane.getChildren().addAll(menuItems);
+            pane.getChildren().addAll(recent, minimize, maximize, close);
         }
         return pane;
     }
 
-    private void attachDimensClass() {
+    private void attachDimensClass() throws Exception {
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         // Prepare Dimensional Frame
         Dimens frame = new Dimens();
+        // Consider Group 'recent' as hinge node
+        new Dimens(recent, frame, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 4, m_strip.getWidth() - 200);
+        frame.arrange();
     }
 
     private void doDynamics() {

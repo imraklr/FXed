@@ -9,11 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Redesigned Dimens.java&#10;Corrected Grammatical mistakes&#10;Unwanted Comments removed">
+    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Added clarification in comment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/watchers/dimens/Dimens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/Dimens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672316680626</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added clarification in comment">
+      <created>1672348132857</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1672348132858</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -198,7 +205,8 @@
     <MESSAGE value="Some added functionalities and styled menu_strip.&#10;Features added - &#10;1) Window can be dragged by dragging rectangle(menu_strip)&#10;2) Dimens.java for keeping track of dimensions of various nodes&#10;3) doorAnims.java to keep animations related to door&#10;4) DefaultArraySize.java for storing default array size of relational nodes specified in Dimens.java&#10;5) doorDecoration.css for styling the Scene 'sc' and its elements&#10;6) Drags.java for keeping a watchdog over several drags in overall application&#10;7) Resizers.java for keeping an eye on resizing of several nodes and stage as well.&#10;&#10;NOTE: Some features may be considered for removal in the future version" />
     <MESSAGE value="1) Added styling in the menu_strip rectangle(LinearGradient)&#10;2) Added attachDimensClass() method in Door.java which is a placeholder function for further implementation to retrieve and associate a watchdog with the dimensions of several nodes." />
     <MESSAGE value="Redesigned Dimens.java&#10;Corrected Grammatical mistakes&#10;Unwanted Comments removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redesigned Dimens.java&#10;Corrected Grammatical mistakes&#10;Unwanted Comments removed" />
+    <MESSAGE value="Added clarification in comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added clarification in comment" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -206,5 +214,8 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/WebViewExamples$Door.ic" NAME="Door Coverage Results" MODIFIED="1672397246295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

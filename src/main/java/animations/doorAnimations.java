@@ -16,6 +16,11 @@ public class doorAnimations {
         animate(menu_strip, MESSAGE);
     }
 
+    public doorAnimations(Rectangle[] recent_min_max_close, String msg) {
+        MESSAGE = msg;
+        animate(recent_min_max_close, msg);
+    }
+
     private void animate(Rectangle menu_strip, String MESSAGE) {
         FillTransition ft;
 
@@ -45,5 +50,10 @@ public class doorAnimations {
                         new Stop(1.0, Color.web("#f01394")))));
             }
         }
+    }
+
+    private void animate(Rectangle[] recent_min_max_close, String msg) {
+        // recent, min, max, close
+        
     }
 }
