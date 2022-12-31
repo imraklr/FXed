@@ -29,6 +29,8 @@ public class Door extends Application {
     private static StackPane parent;
     private Rectangle m_strip; // menu_strip
     private Group recent;
+    double recent_width;
+    double recent_height;
     private Rectangle minimize, maximize, close;
 
     public static void main(String[] args) {
@@ -96,59 +98,62 @@ public class Door extends Application {
         // menu_strip decorations
         {
             Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-            Rectangle menuStrip = new Rectangle(screenBounds.getMaxX(), screenBounds.getMaxY() / 25);
+            Rectangle menuStrip = new Rectangle(screenBounds.getMaxX(), screenBounds.getMaxY() / 26);
             m_strip = menuStrip;
             menuStrip.setId("menu_strip");
             pane.getChildren().add(0, menuStrip);
         }
         // min_max_close buttons(clickable rectangles)
         {
-            // Following three must be put in a triangular form
-            double recents_width = m_strip.getWidth() / 60;
-            double recents_height = m_strip.getHeight() / 10;
-            double recents_arc_height = 10 * recents_height / 2;
-            double recents_arc_width = 10 * recents_height / 2;
-            minimize = new Rectangle(recents_width, recents_height);
-            minimize.setTranslateX(150);
-            minimize.setTranslateY(10);
-            minimize.setRotate(-60);
-            maximize = new Rectangle(recents_width, recents_height);
-            maximize.setTranslateX(200);
-            maximize.setTranslateY(10);
-            maximize.setTranslateY(m_strip.getHeight() / 6);
-            close = new Rectangle(recents_width, recents_height);
-            close.setTranslateX(250);
-            close.setTranslateY(10);
-            close.setRotate(60);
+            recent_width = m_strip.getWidth() / 180 + 5;
+            recent_height = m_strip.getHeight() / 20;
+            double recent_arc_height = 10 * recent_height / 2;
+            double recent_arc_width = 10 * recent_height / 2;
+            minimize = new Rectangle(recent_width, recent_height); // angle = -60
+            minimize.setArcHeight(recent_arc_height);
+            minimize.setArcWidth(recent_arc_width);
+            maximize = new Rectangle(recent_width, recent_height);
+            maximize.setArcHeight(recent_arc_height);
+            maximize.setArcWidth(recent_arc_width);
+            close = new Rectangle(recent_width, recent_height); // angle = 60
+            close.setArcHeight(recent_arc_height);
+            close.setArcWidth(recent_arc_width);
+            // Form triangle with this
 
-            Rectangle recent_1 = new Rectangle(recents_width, recents_height);
+            Rectangle recent_1 = new Rectangle(recent_width, recent_height);
             recent_1.setRotate(60);
-            recent_1.setArcHeight(recents_arc_height);
-            recent_1.setArcWidth(recents_arc_width);
-            Rectangle recent_2 = new Rectangle(recents_width, recents_height);
+            recent_1.setArcHeight(recent_arc_height);
+            recent_1.setArcWidth(recent_arc_width);
+            Rectangle recent_2 = new Rectangle(recent_width, recent_height);
             recent_2.setRotate(-60);
-            recent_2.setArcHeight(recents_arc_height);
-            recent_2.setArcWidth(recents_arc_width);
-            Rectangle recent_3 = new Rectangle(recents_width, recents_height);
-            recent_3.setTranslateY(-((Math.sqrt(3) / 4) * m_strip.getWidth() / 60));
-            recent_3.setArcHeight(recents_arc_height);
-            recent_3.setArcWidth(recents_arc_width);
+            recent_2.setArcHeight(recent_arc_height);
+            recent_2.setArcWidth(recent_arc_width);
+            Rectangle recent_3 = new Rectangle(recent_width, recent_height);
+            recent_3.setTranslateY(-((Math.sqrt(3) / 4) * recent_width));
+            recent_3.setArcHeight(recent_arc_height);
+            recent_3.setArcWidth(recent_arc_width);
             recent = new Group(recent_1, recent_2, recent_3);
-            recent.getChildren().get(0).setTranslateX(-(recents_width / 4));
-            recent.getChildren().get(1).setTranslateX(recents_width / 4);
+            recent.getChildren().get(0).setTranslateX(-(recent_width / 4));
+            recent.getChildren().get(1).setTranslateX(recent_width / 4);
 
             pane.getChildren().addAll(recent, minimize, maximize, close);
         }
         return pane;
     }
 
-    private void attachDimensClass() throws Exception {
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    private void attachDimensClass() {
         // Prepare Dimensional Frame
         Dimens frame = new Dimens();
         // Consider Group 'recent' as hinge node
-        new Dimens(recent, frame, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 4, m_strip.getWidth() - 200);
+        new Dimens(recent, frame, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 2, m_strip.getWidth() - 160, 0, 0);
+        new Dimens(minimize, frame, -(Math.sqrt(3) / 4) * recent_width, 0, 0, -recent_width / 4, -60, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(maximize, frame, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(close, frame, -(Math.sqrt(3) / 4) * recent_width, 0, 0, recent_width / 4, 60, 0, 0, 0, 0, 0, 0, 0);
         frame.arrange();
+        System.out.println(frame);
+
+        // Do frame = new Dimens(); to start with another framing iff you don't require previous frame or if there are
+        // animations/resize/drag available
     }
 
     private void doDynamics() {
