@@ -1,10 +1,11 @@
 package com.example.webviewexamples;
 
 import animations.doorAnimations;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,24 +14,27 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import tabs.Tabs;
 import watchers.dimens.Dimens;
 import watchers.dimens.Drags;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Door extends Application {
     private Stage primaryStage;
     private static StackPane parent;
     private Rectangle m_strip; // menu_strip
-    private Group recent;
-    double recent_width;
-    double recent_height;
+    private Circle new_page, new_page_effect_circle;
+    private Rectangle cover_util;
+    private Circle circle;
     private Rectangle minimize, maximize, close;
 
     public static void main(String[] args) {
@@ -41,6 +45,8 @@ public class Door extends Application {
     public void start(Stage primaryStage) {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
+        primaryStage.setMinHeight(400);
+        primaryStage.setMinWidth(500);
         primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
         primaryStage.setHeight(Screen.getPrimary().getBounds().getHeight());
 
@@ -52,6 +58,8 @@ public class Door extends Application {
 
         primaryStage.setScene(sc);
         primaryStage.show();
+        // Resizer goes here for primary stage
+
 
         // Attach dimension class to nodes
         try {
@@ -59,6 +67,8 @@ public class Door extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // Attach Door Events
+        attachDoorEvents();
         // Attach dynamics
         doDynamics();
     }
@@ -88,7 +98,7 @@ public class Door extends Application {
 
             return gridPane;
         }
-        pane.getChildren().addAll(collected);
+        pane.getChildren().addAll(8, collected);
         return pane;
     }
 
@@ -98,67 +108,134 @@ public class Door extends Application {
         // menu_strip decorations
         {
             Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-            Rectangle menuStrip = new Rectangle(screenBounds.getMaxX(), screenBounds.getMaxY() / 26);
+            Rectangle menuStrip = new Rectangle(screenBounds.getMaxX(), screenBounds.getMaxY() / 30);
             m_strip = menuStrip;
             menuStrip.setId("menu_strip");
             pane.getChildren().add(0, menuStrip);
         }
+        // Provide a transparent rectangle which covers on which if mouse drag if available expands to animate
+        // recent, min, max, close buttons(rectangles)
+        cover_util = new Rectangle();
+        cover_util.setId("menu_strip_cover_util");
         // min_max_close buttons(clickable rectangles)
         {
-            recent_width = m_strip.getWidth() / 180 + 5;
-            recent_height = m_strip.getHeight() / 20;
+            double recent_width = m_strip.getWidth() / 180 + 5;
+            double recent_height = m_strip.getHeight() / 20;
+            cover_util.setWidth(recent_width + recent_width / 2);
+            cover_util.setHeight(recent_width * 2);
+            pane.getChildren().add(1, cover_util);
             double recent_arc_height = 10 * recent_height / 2;
             double recent_arc_width = 10 * recent_height / 2;
             minimize = new Rectangle(recent_width, recent_height); // angle = -60
             minimize.setArcHeight(recent_arc_height);
             minimize.setArcWidth(recent_arc_width);
+            minimize.setId("minBtn");
             maximize = new Rectangle(recent_width, recent_height);
             maximize.setArcHeight(recent_arc_height);
             maximize.setArcWidth(recent_arc_width);
+            maximize.setId("maxBtn");
             close = new Rectangle(recent_width, recent_height); // angle = 60
             close.setArcHeight(recent_arc_height);
             close.setArcWidth(recent_arc_width);
-            // Form triangle with this
+            close.setId("closeBtn");
 
-            Rectangle recent_1 = new Rectangle(recent_width, recent_height);
-            recent_1.setRotate(60);
-            recent_1.setArcHeight(recent_arc_height);
-            recent_1.setArcWidth(recent_arc_width);
-            Rectangle recent_2 = new Rectangle(recent_width, recent_height);
-            recent_2.setRotate(-60);
-            recent_2.setArcHeight(recent_arc_height);
-            recent_2.setArcWidth(recent_arc_width);
-            Rectangle recent_3 = new Rectangle(recent_width, recent_height);
-            recent_3.setTranslateY(-((Math.sqrt(3) / 4) * recent_width));
-            recent_3.setArcHeight(recent_arc_height);
-            recent_3.setArcWidth(recent_arc_width);
-            recent = new Group(recent_1, recent_2, recent_3);
-            recent.getChildren().get(0).setTranslateX(-(recent_width / 4));
-            recent.getChildren().get(1).setTranslateX(recent_width / 4);
-
-            pane.getChildren().addAll(recent, minimize, maximize, close);
+            pane.getChildren().add(2, minimize);
+            pane.getChildren().add(3, maximize);
+            pane.getChildren().add(4, close);
         }
+        // place activity buttons
+        {
+            new_page = new Circle(m_strip.getHeight() / 2.5);
+            new_page.setFill(Color.web("#FFFFFF"));
+            new_page.setOpacity(0.5);
+            new_page_effect_circle = new Circle(m_strip.getHeight() / 2.5);
+            new_page_effect_circle.setFill(Color.web("#FFFFFF"));
+            new_page_effect_circle.setOpacity(0.0);
+            new_page_effect_circle.setId("menu_strip_add_page_effect_circle");
+            new_page.setId("menu_strip_add_page");
+            pane.getChildren().add(5, new_page_effect_circle);
+            pane.getChildren().add(6, new_page);
+        }
+
+        circle = new Circle(50);
+        circle.setTranslateX(300);
+        circle.setTranslateY(300);
+        pane.getChildren().add(7, circle);
+
         return pane;
     }
 
     private void attachDimensClass() {
         // Prepare Dimensional Frame
         Dimens frame = new Dimens();
-        // Consider Group 'recent' as hinge node
-        new Dimens(recent, frame, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 2, m_strip.getWidth() - 160, 0, 0);
-        new Dimens(minimize, frame, -(Math.sqrt(3) / 4) * recent_width, 0, 0, -recent_width / 4, -60, 0, 0, 0, 0, 0, 0, 0);
-        new Dimens(maximize, frame, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        new Dimens(close, frame, -(Math.sqrt(3) / 4) * recent_width, 0, 0, recent_width / 4, 60, 0, 0, 0, 0, 0, 0, 0);
+        // Consider Rectangle 'minimize' as hinge node
+        // Only hinge node can have last four parameter not equal to zero
+        new Dimens(minimize, frame, 0, 0, 0, 0, -60, 0, 0, 0, m_strip.getHeight() / 2, m_strip.getWidth() - minimize.getWidth() * 2, 0, 0);
+        new Dimens(maximize, frame, ((Math.sqrt(3) * maximize.getWidth()) / 4), 0, 0, ((1 * maximize.getWidth()) / 4), 0, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(close, frame, 0, 0, 0, close.getWidth() / 2, 60, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(cover_util, frame, -(m_strip.getHeight() - ((Math.sqrt(3) * maximize.getWidth()) / 1.4)), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         frame.arrange();
-        System.out.println(frame);
 
         // Do frame = new Dimens(); to start with another framing iff you don't require previous frame or if there are
         // animations/resize/drag available
+        Dimens frame1 = new Dimens();
+        new Dimens(new_page_effect_circle, frame1, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 20, m_strip.getWidth() / 2 - new_page.getLayoutBounds().getWidth() / 2, 0, 0);
+        new Dimens(new_page, frame1, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 20, m_strip.getWidth() / 2 - new_page.getLayoutBounds().getWidth() / 2, 0, 0);
+        frame1.arrange();
     }
 
     private void doDynamics() {
         new Drags(m_strip, primaryStage);
+
         new doorAnimations(m_strip, "");
+
+        new doorAnimations(cover_util, minimize, maximize, close);
+
+        LinkedList<Object> userData1 = new LinkedList<>();
+        {
+            userData1.add("FOLLOW");
+            userData1.add(Duration.seconds(0.1));
+            userData1.add(new double[]{new_page.getRadius(), m_strip.getHeight() / 10, .0001,
+                    new_page.getRadius(), m_strip.getHeight() / 10, .0001});
+            userData1.add(Cursor.DEFAULT);
+        }
+        new_page.setUserData(userData1);
+        LinkedList<Object> userData2 = new LinkedList<>();
+        {
+            userData2.add("FOLLOW");
+            userData2.add(Duration.seconds(0.05));
+            userData2.add("ADJUSTED");
+            userData2.add(new_page);
+        }
+        new_page_effect_circle.setUserData(userData2);
+        new doorAnimations(new_page, new_page_effect_circle);
+
+        new doorAnimations(circle);
+    }
+
+    private void attachDoorEvents() {
+        // Attach different types of events
+        new_page.setOnMouseEntered(e -> {
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.5),
+                    new_page_effect_circle);
+            fadeTransition.setFromValue(.5);
+            fadeTransition.setToValue(1.);
+            fadeTransition.play();
+        });
+        new_page.setOnMouseClicked(e -> {
+            // Perform some action and restore the opacity
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.5), new_page_effect_circle);
+            fadeTransition.setFromValue(1.);
+            fadeTransition.setToValue(.5);
+            fadeTransition.play();
+        });
+        new_page.setOnMouseExited(e -> {
+            // Perform opacity restoration
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.5), new_page_effect_circle);
+            fadeTransition.setFromValue(1.);
+            fadeTransition.setToValue(.5);
+            fadeTransition.play();
+        });
     }
 
     public StackPane getParent() {

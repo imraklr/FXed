@@ -77,10 +77,8 @@ public class Dimens {
                 // All are placed relative to hinge node and hinge node is placed relative to hinge node itself
                 temp.v[8] = temp.v[0] + hinge.v[8];
                 temp.v[9] = temp.v[3] + hinge.v[9];
-                /*
-                 * For debugging purpose use this -
-                 * System.out.println(temp.v[9]+" == "+hinge.v[9]+", "+temp.v[8]+" == "+hinge.v[8]);
-                 */
+//                For debugging purpose use this -
+//                System.out.println(temp.v[9]+" == "+hinge.v[9]+", "+temp.v[8]+" == "+hinge.v[8]);
                 temp.node.setTranslateY(temp.v[8]);
                 temp.node.setTranslateX(temp.v[9]);
                 temp.node.setRotate(temp.v[4]); // Rotated
