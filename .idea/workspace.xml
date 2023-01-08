@@ -9,14 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Added clarification in comment. Redesigned Dimens.java, improved comments and improved Door.java file(see changes).">
-      <change afterPath="$PROJECT_DIR$/src/main/java/logs/Logs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/resizers/Resizers.java" afterDir="false" />
+    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Improved look and feel. Few Animations have association with the menu_strip items.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/watchers/dimens/Dimens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/watchers/dimens/Dimens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/watchers/dimens/Resizers.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -231,6 +227,6 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WebViewExamples$Door.ic" NAME="Door Coverage Results" MODIFIED="1672686819894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/WebViewExamples$Door.ic" NAME="Door Coverage Results" MODIFIED="1673182743483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

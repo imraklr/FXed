@@ -1,6 +1,7 @@
 package animations;
 
-import javafx.animation.*;
+import javafx.animation.FillTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -66,7 +67,6 @@ public class doorAnimations {
                                 translateTransition_toNode.setToY(((Node) thisAdjustedTo).getTranslateY());
                                 translateTransition_toNode.setToZ(((Node) thisAdjustedTo).getTranslateZ());
                                 translateTransition_toNode.play();
-                                translateTransition_toNode.setOnFinished(e -> translateTransition_toNode.stop());
                                 ((Node) thisAdjustedTo).translateXProperty().addListener((observableValue, number, t1) -> {
                                     ((Node) thisAdjustedTo).setTranslateX((double) t1);
                                     TranslateTransition translateTransition = new TranslateTransition();
@@ -75,7 +75,6 @@ public class doorAnimations {
                                     translateTransition.setFromX(in.getTranslateX());
                                     translateTransition.setToX((double) t1);
                                     translateTransition.play();
-                                    translateTransition.setOnFinished(e -> translateTransition.stop());
                                 });
                                 ((Node) thisAdjustedTo).translateYProperty().addListener((observableValue, number, t1) -> {
                                     ((Node) thisAdjustedTo).setTranslateY((double) t1);
@@ -85,7 +84,6 @@ public class doorAnimations {
                                     translateTransition.setFromY(in.getTranslateY());
                                     translateTransition.setToY((double) t1);
                                     translateTransition.play();
-                                    translateTransition.setOnFinished(e -> translateTransition.stop());
                                 });
                                 ((Node) thisAdjustedTo).translateZProperty().addListener((observableValue, number, t1) -> {
                                     ((Node) thisAdjustedTo).setTranslateZ((double) t1);
@@ -95,7 +93,6 @@ public class doorAnimations {
                                     translateTransition.setFromZ(in.getTranslateX());
                                     translateTransition.setToZ((double) t1);
                                     translateTransition.play();
-                                    translateTransition.setOnFinished(e -> translateTransition.stop());
                                 });
                             } else if (thisAdjustedTo instanceof Cursor) {
                                 double old_translateX = in.getTranslateX();
@@ -282,85 +279,5 @@ public class doorAnimations {
     }
 
     public static void animate(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
-
-        double original_XPos_min = min.getTranslateX(), original_YPos_min = min.getTranslateY();
-        // double original_min_angle = min.getRotate(), original_close_angle = close.getRotate();
-        double original_XPos_max = max.getTranslateX(), original_YPos_max = max.getTranslateY();
-        double original_XPos_close = close.getTranslateX(), original_YPos_close = close.getTranslateY();
-        // double original_XPos_cover_util = cover_util.getTranslateX();
-        // double original_YPos_cover_util = cover_util.getTranslateY();
-
-        double[] size_cover_util = {cover_util.getWidth(), cover_util.getHeight()};
-        double[] size_cover_min = {min.getWidth(), min.getHeight()};
-        double[] size_cover_max = {max.getWidth(), max.getHeight()};
-        double[] size_cover_close = {close.getWidth(), close.getHeight()};
-
-        cover_util.setOnMouseEntered(e -> {
-            ScaleTransition scaleTransition_cover_util = new ScaleTransition(Duration.seconds(1.3), cover_util);
-            scaleTransition_cover_util.setByX(10.0);
-            scaleTransition_cover_util.setByY(.1);
-            scaleTransition_cover_util.play();
-
-            TranslateTransition translateTransition_min = new TranslateTransition(Duration.seconds(1.3));
-            translateTransition_min.setToX(original_XPos_min - 30);
-            translateTransition_min.setToY(original_YPos_max / 1.5);
-            ScaleTransition scaleTransition_min = new ScaleTransition(Duration.seconds(1.3));
-            scaleTransition_min.setByX(1.);
-            scaleTransition_min.setByY(6.);
-            RotateTransition rotateTransition_min = new RotateTransition(Duration.seconds(1.6));
-            rotateTransition_min.setToAngle(0.0);
-            ParallelTransition parallelTransition_min = new ParallelTransition(
-                    min, translateTransition_min, scaleTransition_min, rotateTransition_min);
-            parallelTransition_min.play();
-
-            TranslateTransition translateTransition_max = new TranslateTransition(Duration.seconds(1.3));
-            translateTransition_max.setToX(original_XPos_max - 70);
-            translateTransition_max.setToY(original_YPos_max / 1.5);
-            ScaleTransition scaleTransition_max = new ScaleTransition(Duration.seconds(1.3));
-            scaleTransition_max.setByX(1.);
-            scaleTransition_max.setByY(6.);
-            ParallelTransition parallelTransition_max = new ParallelTransition(
-                    max, translateTransition_max, scaleTransition_max);
-            parallelTransition_max.play();
-
-            TranslateTransition translateTransition_close = new TranslateTransition(Duration.seconds(1.3));
-            translateTransition_close.setToX(original_XPos_close - 110);
-            translateTransition_close.setToY(original_YPos_max / 1.5);
-            ScaleTransition scaleTransition_close = new ScaleTransition(Duration.seconds(1.3));
-            scaleTransition_close.setByY(6.);
-            scaleTransition_close.setByX(1.);
-            RotateTransition rotateTransition_close = new RotateTransition(Duration.seconds(1.6));
-            rotateTransition_close.setToAngle(0.0);
-            ParallelTransition parallelTransition_close = new ParallelTransition(close,
-                    translateTransition_close, scaleTransition_close, rotateTransition_close);
-            parallelTransition_close.play();
-        });
-        // Following lambda block requires some changes
-        cover_util.setOnMouseExited(e -> {
-            // Transition, Scaling and rotation restoration
-            TranslateTransition translateTransition_min = new TranslateTransition(Duration.seconds(1.3), min);
-            translateTransition_min.setToX(original_XPos_min);
-            translateTransition_min.setToY(original_YPos_min);
-            ScaleTransition scaleTransition_min = new ScaleTransition(Duration.seconds(1.6), min);
-            scaleTransition_min.setToX(size_cover_min[0]);
-            scaleTransition_min.setToY(size_cover_min[1]);
-            RotateTransition rotateTransition_min = new RotateTransition(Duration.seconds(1.3), min);
-            rotateTransition_min.setToAngle(-60);
-            ParallelTransition parallelTransition_min = new ParallelTransition(
-                    translateTransition_min, scaleTransition_min, rotateTransition_min);
-            parallelTransition_min.play();
-
-            TranslateTransition translateTransition_close = new TranslateTransition(Duration.seconds(1.3), close);
-            translateTransition_min.setToX(original_XPos_close);
-            translateTransition_min.setToY(original_YPos_close);
-            ScaleTransition scaleTransition_close = new ScaleTransition(Duration.seconds(1.6), close);
-            scaleTransition_close.setToX(size_cover_close[0]);
-            scaleTransition_close.setToY(size_cover_close[1]);
-            RotateTransition rotateTransition_close = new RotateTransition(Duration.seconds(1.3), close);
-            rotateTransition_min.setToAngle(60);
-            ParallelTransition parallelTransition_close = new ParallelTransition(
-                    translateTransition_close, scaleTransition_close, rotateTransition_close);
-            parallelTransition_close.play();
-        });
     }
 }

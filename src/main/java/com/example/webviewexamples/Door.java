@@ -5,7 +5,6 @@ import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,16 +25,20 @@ import watchers.dimens.Drags;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.LinkedList;
 
 public class Door extends Application {
     private Stage primaryStage;
     private static StackPane parent;
     private Rectangle m_strip; // menu_strip
-    private Circle new_page, new_page_effect_circle;
+    private Circle new_page, new_page_effect_circle,
+            bookmarks, bookmarks_effect_circle,
+            refresh, refresh_effect_circle;
+    private Label new_page_label, bookmarks_label, refresh_label;
     private Rectangle cover_util;
-    private Circle circle;
     private Rectangle minimize, maximize, close;
+
+    public Door() {
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -147,21 +150,50 @@ public class Door extends Application {
         {
             new_page = new Circle(m_strip.getHeight() / 2.5);
             new_page.setFill(Color.web("#FFFFFF"));
-            new_page.setOpacity(0.5);
+            new_page.setOpacity(0.3);
             new_page_effect_circle = new Circle(m_strip.getHeight() / 2.5);
             new_page_effect_circle.setFill(Color.web("#FFFFFF"));
             new_page_effect_circle.setOpacity(0.0);
-            new_page_effect_circle.setId("menu_strip_add_page_effect_circle");
-            new_page.setId("menu_strip_add_page");
+            new_page_effect_circle.setId("menu_strip_effect_circle");
+            new_page.setId("menu_strip_item_circles");
+            new_page_label = new Label("+");
+            new_page_label.setScaleX(new_page.getRadius() / 5.0);
+            new_page_label.setScaleY(new_page.getRadius() / 5.0);
             pane.getChildren().add(5, new_page_effect_circle);
-            pane.getChildren().add(6, new_page);
+            pane.getChildren().add(6, new_page_label);
+            pane.getChildren().add(7, new_page);
+
+            refresh = new Circle(m_strip.getHeight() / 2.5);
+            refresh.setFill(Color.web("#FFFFFF"));
+            refresh.setOpacity(0.3);
+            refresh_effect_circle = new Circle(m_strip.getHeight() / 2.5);
+            refresh_effect_circle.setFill(Color.web("#FFFFFF"));
+            refresh_effect_circle.setOpacity(0.0);
+            refresh_effect_circle.setId("menu_strip_effect_circle");
+            refresh.setId("menu_strip_item_circles");
+            refresh_label = new Label("↻");
+            refresh_label.setScaleX(refresh.getRadius() / 5.0);
+            refresh_label.setScaleY(refresh.getRadius() / 6.0);
+            pane.getChildren().add(8, refresh_effect_circle);
+            pane.getChildren().add(9, refresh_label);
+            pane.getChildren().add(10, refresh);
+
+            bookmarks = new Circle(m_strip.getHeight() / 2.5);
+            bookmarks.setFill(Color.web("#FFFFFF"));
+            bookmarks.setOpacity(0.3);
+            bookmarks_effect_circle = new Circle(m_strip.getHeight() / 2.5);
+            bookmarks_effect_circle.setFill(Color.web("#FFFFFF"));
+            bookmarks_effect_circle.setOpacity(0.0);
+            bookmarks_effect_circle.setId("menu_strip_effect_circle");
+            bookmarks.setId("menu_strip_item_circles");
+            bookmarks_label = new Label("\uD83D\uDD16");
+            bookmarks_label.setScaleX(bookmarks.getRadius() / 10.0);
+            bookmarks_label.setScaleY(bookmarks.getRadius() / 10.0);
+            pane.getChildren().add(11, bookmarks_effect_circle);
+            pane.getChildren().add(12, bookmarks_label);
+            pane.getChildren().add(13, bookmarks);
+
         }
-
-        circle = new Circle(50);
-        circle.setTranslateX(300);
-        circle.setTranslateY(300);
-        pane.getChildren().add(7, circle);
-
         return pane;
     }
 
@@ -181,6 +213,16 @@ public class Door extends Application {
         Dimens frame1 = new Dimens();
         new Dimens(new_page_effect_circle, frame1, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 20, m_strip.getWidth() / 2 - new_page.getLayoutBounds().getWidth() / 2, 0, 0);
         new Dimens(new_page, frame1, 0, 0, 0, 0, 0, 0, 0, 0, m_strip.getHeight() / 20, m_strip.getWidth() / 2 - new_page.getLayoutBounds().getWidth() / 2, 0, 0);
+        new Dimens(new_page_label, frame1, 0, 0, 0, new_page.getRadius() / 1.5, 0, 0, 0, 0, 0, 0, 0, 0);
+
+        new Dimens(refresh, frame1, 0, 0, 0, refresh.getLayoutBounds().getWidth() + m_strip.getWidth() / 200, 0, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(refresh_effect_circle, frame1, 0, 0, 0, refresh.getLayoutBounds().getWidth() + m_strip.getWidth() / 200, 0, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(refresh_label, frame1, 0, 0, 0, refresh.getLayoutBounds().getWidth() + m_strip.getWidth() / 200 + refresh_label.getWidth(), 0, 0, 0, 0, 0, 0, 0, 0);
+
+        new Dimens(bookmarks, frame1, 0, 0, 0, bookmarks.getLayoutBounds().getWidth() + 5 * (m_strip.getWidth() / 200), 0, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(bookmarks_effect_circle, frame1, 0, 0, 0, bookmarks.getLayoutBounds().getWidth() + 5 * (m_strip.getWidth() / 200), 0, 0, 0, 0, 0, 0, 0, 0);
+        new Dimens(bookmarks_label, frame1, 0, 0, 0, bookmarks.getLayoutBounds().getWidth() + 5 * (m_strip.getWidth() / 200) + bookmarks_label.getWidth() / 2.5, 0, 0, 0, 0, 0, 0, 0, 0);
+
         frame1.arrange();
     }
 
@@ -190,51 +232,62 @@ public class Door extends Application {
         new doorAnimations(m_strip, "");
 
         new doorAnimations(cover_util, minimize, maximize, close);
-
-        LinkedList<Object> userData1 = new LinkedList<>();
-        {
-            userData1.add("FOLLOW");
-            userData1.add(Duration.seconds(0.1));
-            userData1.add(new double[]{new_page.getRadius(), m_strip.getHeight() / 10, .0001,
-                    new_page.getRadius(), m_strip.getHeight() / 10, .0001});
-            userData1.add(Cursor.DEFAULT);
-        }
-        new_page.setUserData(userData1);
-        LinkedList<Object> userData2 = new LinkedList<>();
-        {
-            userData2.add("FOLLOW");
-            userData2.add(Duration.seconds(0.05));
-            userData2.add("ADJUSTED");
-            userData2.add(new_page);
-        }
-        new_page_effect_circle.setUserData(userData2);
-        new doorAnimations(new_page, new_page_effect_circle);
-
-        new doorAnimations(circle);
     }
 
     private void attachDoorEvents() {
-        // Attach different types of events
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.125), new_page_effect_circle);
         new_page.setOnMouseEntered(e -> {
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.5),
-                    new_page_effect_circle);
-            fadeTransition.setFromValue(.5);
+            fadeTransition.setFromValue(new_page_effect_circle.getOpacity());
             fadeTransition.setToValue(1.);
             fadeTransition.play();
         });
         new_page.setOnMouseClicked(e -> {
-            // Perform some action and restore the opacity
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.5), new_page_effect_circle);
-            fadeTransition.setFromValue(1.);
-            fadeTransition.setToValue(.5);
+            // Perform some action and opacity restoration
+            fadeTransition.setFromValue(new_page_effect_circle.getOpacity());
+            fadeTransition.setToValue(.2);
             fadeTransition.play();
         });
         new_page.setOnMouseExited(e -> {
             // Perform opacity restoration
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.5), new_page_effect_circle);
-            fadeTransition.setFromValue(1.);
-            fadeTransition.setToValue(.5);
+            fadeTransition.setFromValue(new_page_effect_circle.getOpacity());
+            fadeTransition.setToValue(.2);
             fadeTransition.play();
+        });
+        FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(.125), bookmarks_effect_circle);
+        bookmarks.setOnMouseEntered(e -> {
+            fadeTransition1.setFromValue(bookmarks_effect_circle.getOpacity());
+            fadeTransition1.setToValue(1.);
+            fadeTransition1.play();
+        });
+        bookmarks.setOnMouseClicked(e -> {
+            // Perform some action and opacity restoration
+            fadeTransition1.setFromValue(bookmarks_effect_circle.getOpacity());
+            fadeTransition1.setToValue(.2);
+            fadeTransition1.play();
+        });
+        bookmarks.setOnMouseExited(e -> {
+            // Perform opacity restoration
+            fadeTransition1.setFromValue(bookmarks_effect_circle.getOpacity());
+            fadeTransition1.setToValue(.2);
+            fadeTransition1.play();
+        });
+        FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(.125), refresh_effect_circle);
+        refresh.setOnMouseEntered(e -> {
+            fadeTransition2.setFromValue(refresh_effect_circle.getOpacity());
+            fadeTransition2.setToValue(1.);
+            fadeTransition2.play();
+        });
+        refresh.setOnMouseClicked(e -> {
+            // Perform some action and opacity restoration
+            fadeTransition2.setFromValue(refresh_effect_circle.getOpacity());
+            fadeTransition2.setToValue(.2);
+            fadeTransition2.play();
+        });
+        refresh.setOnMouseExited(e -> {
+            // Perform opacity restoration
+            fadeTransition2.setFromValue(refresh_effect_circle.getOpacity());
+            fadeTransition2.setToValue(.2);
+            fadeTransition2.play();
         });
     }
 
