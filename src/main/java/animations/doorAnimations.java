@@ -20,13 +20,17 @@ public class doorAnimations {
         MESSAGE = msg;
         animate(menu_strip, MESSAGE);
     }
+
     private double[] xOffset_mouseEvent, yOffset_mouseEvent, zOffset_mouseEvent;
     private int i = -1;
+
     public doorAnimations(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
         MESSAGE = "";
         animate(cover_util, min, max, close);
     }
 
+    // Extra method for general use
+    @SuppressWarnings("unused")
     public doorAnimations(Node... v) {
         xOffset_mouseEvent = new double[v.length];
         yOffset_mouseEvent = new double[v.length];
@@ -278,6 +282,7 @@ public class doorAnimations {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void animate(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
     }
 }
