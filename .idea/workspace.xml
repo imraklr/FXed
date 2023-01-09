@@ -11,9 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Improved look and feel. Few Animations have association with the menu_strip items.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +176,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672473998358</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Removed animations for menu items from doorAnimations.java file and add two circles for refresh button and bookmark button.">
+      <created>1673191119221</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1673191119221</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Improved Comments and some warnings suppressed.">
+      <created>1673191220740</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673191220740</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,7 +229,9 @@
     <MESSAGE value="Redesigned Dimens.java&#10;Corrected Grammatical mistakes&#10;Unwanted Comments removed" />
     <MESSAGE value="Added clarification in comment" />
     <MESSAGE value="Added clarification in comment. Redesigned Dimens.java, improved comments and improved Door.java file(see changes)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added clarification in comment. Redesigned Dimens.java, improved comments and improved Door.java file(see changes)." />
+    <MESSAGE value="Removed animations for menu items from doorAnimations.java file and add two circles for refresh button and bookmark button." />
+    <MESSAGE value="Improved Comments and some warnings suppressed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved Comments and some warnings suppressed." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
