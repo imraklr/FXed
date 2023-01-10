@@ -1,2 +1,2 @@
 # FXed
-FXed is a web browser and FXed is an example for JavaFX.
+FXed is a web browser and an example for JavaFX.
