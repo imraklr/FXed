@@ -297,113 +297,126 @@ public class Door extends Application {
     }
 
     private void attachDoorEvents() {
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(.125), new_page_effect_circle);
+        final FadeTransition[] fadeTransitions = new FadeTransition[6];
         new_page.setOnMouseEntered(e -> {
-            fadeTransition.setFromValue(new_page_effect_circle.getOpacity());
-            fadeTransition.setToValue(1.);
-            fadeTransition.play();
+            fadeTransitions[0] = new FadeTransition(Duration.seconds(.45), new_page_effect_circle);
+            fadeTransitions[0].setFromValue(new_page_effect_circle.getOpacity());
+            fadeTransitions[0].setToValue(1.);
+            fadeTransitions[0].play();
         });
         new_page.setOnMouseClicked(e -> {
+            fadeTransitions[0] = new FadeTransition(Duration.seconds(.45), new_page_effect_circle);
             // Perform some action and opacity restoration
-            fadeTransition.setFromValue(new_page_effect_circle.getOpacity());
-            fadeTransition.setToValue(.2);
-            fadeTransition.play();
+            fadeTransitions[0].setFromValue(new_page_effect_circle.getOpacity());
+            fadeTransitions[0].setToValue(.2);
+            fadeTransitions[0].play();
         });
         new_page.setOnMouseExited(e -> {
+            fadeTransitions[0] = new FadeTransition(Duration.seconds(.45), new_page_effect_circle);
             // Perform opacity restoration
-            fadeTransition.setFromValue(new_page_effect_circle.getOpacity());
-            fadeTransition.setToValue(.2);
-            fadeTransition.play();
+            fadeTransitions[0].setFromValue(new_page_effect_circle.getOpacity());
+            fadeTransitions[0].setToValue(.2);
+            fadeTransitions[0].play();
         });
-        FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(.125), bookmarks_effect_circle);
         bookmarks.setOnMouseEntered(e -> {
-            fadeTransition1.setFromValue(bookmarks_effect_circle.getOpacity());
-            fadeTransition1.setToValue(1.);
-            fadeTransition1.play();
+            fadeTransitions[1] = new FadeTransition(Duration.seconds(.45), bookmarks_effect_circle);
+            fadeTransitions[1].setFromValue(bookmarks_effect_circle.getOpacity());
+            fadeTransitions[1].setToValue(1.);
+            fadeTransitions[1].play();
         });
         bookmarks.setOnMouseClicked(e -> {
+            fadeTransitions[1] = new FadeTransition(Duration.seconds(.45), bookmarks_effect_circle);
             // Perform some action and opacity restoration
-            fadeTransition1.setFromValue(bookmarks_effect_circle.getOpacity());
-            fadeTransition1.setToValue(.2);
-            fadeTransition1.play();
+            fadeTransitions[1].setFromValue(bookmarks_effect_circle.getOpacity());
+            fadeTransitions[1].setToValue(.2);
+            fadeTransitions[1].play();
         });
         bookmarks.setOnMouseExited(e -> {
+            fadeTransitions[1] = new FadeTransition(Duration.seconds(.45), bookmarks_effect_circle);
             // Perform opacity restoration
-            fadeTransition1.setFromValue(bookmarks_effect_circle.getOpacity());
-            fadeTransition1.setToValue(.2);
-            fadeTransition1.play();
+            fadeTransitions[1].setFromValue(bookmarks_effect_circle.getOpacity());
+            fadeTransitions[1].setToValue(.2);
+            fadeTransitions[1].play();
         });
-        FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(.125), refresh_effect_circle);
         refresh.setOnMouseEntered(e -> {
-            fadeTransition2.setFromValue(refresh_effect_circle.getOpacity());
-            fadeTransition2.setToValue(1.);
-            fadeTransition2.play();
+            fadeTransitions[2] = new FadeTransition(Duration.seconds(.45), refresh_effect_circle);
+            fadeTransitions[2].setFromValue(refresh_effect_circle.getOpacity());
+            fadeTransitions[2].setToValue(1.);
+            fadeTransitions[2].play();
         });
         refresh.setOnMouseClicked(e -> {
+            fadeTransitions[2] = new FadeTransition(Duration.seconds(.45), refresh_effect_circle);
             // Perform some action and opacity restoration
-            fadeTransition2.setFromValue(refresh_effect_circle.getOpacity());
-            fadeTransition2.setToValue(.2);
-            fadeTransition2.play();
+            fadeTransitions[2].setFromValue(refresh_effect_circle.getOpacity());
+            fadeTransitions[2].setToValue(.2);
+            fadeTransitions[2].play();
         });
         refresh.setOnMouseExited(e -> {
+            fadeTransitions[2] = new FadeTransition(Duration.seconds(.45), refresh_effect_circle);
             // Perform opacity restoration
-            fadeTransition2.setFromValue(refresh_effect_circle.getOpacity());
-            fadeTransition2.setToValue(.2);
-            fadeTransition2.play();
+            fadeTransitions[2].setFromValue(refresh_effect_circle.getOpacity());
+            fadeTransitions[2].setToValue(.2);
+            fadeTransitions[2].play();
         });
-        FadeTransition fadeTransition3 = new FadeTransition(Duration.seconds(.125), close_page_effect_circle);
         close_page.setOnMouseEntered(e -> {
-            fadeTransition3.setFromValue(close_page_effect_circle.getOpacity());
-            fadeTransition3.setToValue(1.);
-            fadeTransition3.play();
+            fadeTransitions[5] = new FadeTransition(Duration.seconds(.45), close_page_effect_circle);
+            fadeTransitions[5].setFromValue(close_page_effect_circle.getOpacity());
+            fadeTransitions[5].setToValue(1.);
+            fadeTransitions[5].play();
         });
         close_page.setOnMouseClicked(e -> {
+            fadeTransitions[5] = new FadeTransition(Duration.seconds(.45), close_page_effect_circle);
             // Perform some action and opacity restoration
-            fadeTransition3.setFromValue(close_page_effect_circle.getOpacity());
-            fadeTransition3.setToValue(.2);
-            fadeTransition3.play();
+            fadeTransitions[5].setFromValue(close_page_effect_circle.getOpacity());
+            fadeTransitions[5].setToValue(.2);
+            fadeTransitions[5].play();
         });
         close_page.setOnMouseExited(e -> {
+            fadeTransitions[5] = new FadeTransition(Duration.seconds(.45), close_page_effect_circle);
             // Perform opacity restoration
-            fadeTransition3.setFromValue(close_page_effect_circle.getOpacity());
-            fadeTransition3.setToValue(.2);
-            fadeTransition3.play();
+            fadeTransitions[5].setFromValue(close_page_effect_circle.getOpacity());
+            fadeTransitions[5].setToValue(.2);
+            fadeTransitions[5].play();
         });
-        FadeTransition fadeTransition4 = new FadeTransition(Duration.seconds(.125), forward_effect_circle);
         forward.setOnMouseEntered(e -> {
-            fadeTransition4.setFromValue(forward_effect_circle.getOpacity());
-            fadeTransition4.setToValue(1.);
-            fadeTransition4.play();
+            fadeTransitions[3] = new FadeTransition(Duration.seconds(.45), forward_effect_circle);
+            fadeTransitions[3].setFromValue(forward_effect_circle.getOpacity());
+            fadeTransitions[3].setToValue(1.);
+            fadeTransitions[3].play();
         });
         forward.setOnMouseClicked(e -> {
+            fadeTransitions[3] = new FadeTransition(Duration.seconds(.45), forward_effect_circle);
             // Perform some action and opacity restoration
-            fadeTransition4.setFromValue(forward_effect_circle.getOpacity());
-            fadeTransition4.setToValue(.2);
-            fadeTransition4.play();
+            fadeTransitions[3].setFromValue(forward_effect_circle.getOpacity());
+            fadeTransitions[3].setToValue(.2);
+            fadeTransitions[3].play();
         });
         forward.setOnMouseExited(e -> {
+            fadeTransitions[3] = new FadeTransition(Duration.seconds(.45), forward_effect_circle);
             // Perform opacity restoration
-            fadeTransition4.setFromValue(forward_effect_circle.getOpacity());
-            fadeTransition4.setToValue(.2);
-            fadeTransition4.play();
+            fadeTransitions[3].setFromValue(forward_effect_circle.getOpacity());
+            fadeTransitions[3].setToValue(.2);
+            fadeTransitions[3].play();
         });
-        FadeTransition fadeTransition5 = new FadeTransition(Duration.seconds(.125), backward_effect_circle);
         backward.setOnMouseEntered(e -> {
-            fadeTransition5.setFromValue(backward_effect_circle.getOpacity());
-            fadeTransition5.setToValue(1.);
-            fadeTransition5.play();
+            fadeTransitions[4] = new FadeTransition(Duration.seconds(.45), backward_effect_circle);
+            fadeTransitions[4].setFromValue(backward_effect_circle.getOpacity());
+            fadeTransitions[4].setToValue(1.);
+            fadeTransitions[4].play();
         });
         backward.setOnMouseClicked(e -> {
+            fadeTransitions[4] = new FadeTransition(Duration.seconds(.45), backward_effect_circle);
             // Perform some action and opacity restoration
-            fadeTransition5.setFromValue(backward_effect_circle.getOpacity());
-            fadeTransition5.setToValue(.2);
-            fadeTransition5.play();
+            fadeTransitions[4].setFromValue(backward_effect_circle.getOpacity());
+            fadeTransitions[4].setToValue(.2);
+            fadeTransitions[4].play();
         });
         backward.setOnMouseExited(e -> {
+            fadeTransitions[4] = new FadeTransition(Duration.seconds(.45), backward_effect_circle);
             // Perform opacity restoration
-            fadeTransition5.setFromValue(backward_effect_circle.getOpacity());
-            fadeTransition5.setToValue(.2);
-            fadeTransition5.play();
+            fadeTransitions[4].setFromValue(backward_effect_circle.getOpacity());
+            fadeTransitions[4].setToValue(.2);
+            fadeTransitions[4].play();
         });
     }
 
