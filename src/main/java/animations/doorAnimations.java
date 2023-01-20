@@ -256,8 +256,11 @@ public class doorAnimations {
         switch (MESSAGE) {
             case "" -> // placeholder for animations for this linear gradient(if possible with current version of JavaFX)
                     menu_strip.setFill(new LinearGradient(0.0, 1.0, 1.0, 1.0, true, CycleMethod.NO_CYCLE,
-                            new Stop(0.0, Color.web("#ff6600")),
-                            new Stop(1.0, Color.web("#3ab584"))));
+                            new Stop(.0, Color.web("#ff9900")),
+                            new Stop(.25, Color.web("#3ab584")),
+                            new Stop(.5, Color.web("#000000")),
+                            new Stop(.75, Color.web("#ff5203")),
+                            new Stop(1., Color.web("#edc187"))));
             case "ERROR" -> {
                 ft = new FillTransition(Duration.millis(1300), menu_strip,
                         Color.web("#ff0000"), Color.web("#e38f8f"));

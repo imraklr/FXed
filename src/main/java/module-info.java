@@ -3,5 +3,4 @@ module com.example.webviewexamples {
     requires javafx.web;
 
     exports com.example.webviewexamples;
-    exports tabs;
 }

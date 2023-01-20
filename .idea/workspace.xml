@@ -9,9 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Improved look and feel. Few Animations have association with the menu_strip items.">
+    <list default="true" id="480865c6-2c1c-4680-93af-6790c12abb60" name="Changes" comment="Improve menu items with less animation timing.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/TabsManager/Tabs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/animations/doorAnimations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/webviewexamples/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tabs/Tabs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tabs/defaults/Home.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +30,14 @@
         <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="improve-insert-new-menu-items" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,22 +74,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KIIT/Desktop/Rands/RandJav/year2023/justBeforeYear2023/WebViewExamples/src/main/java/com/example/webviewexamples&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.16091955&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/KIIT/Desktop/Rands/RandJav/year2023/justBeforeYear2023/WebViewExamples/src/main/java/com/example/webviewexamples",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.16091955",
+    "settings.editor.selected.configurable": "proofread"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\KIIT\Desktop\Rands\RandJav\year2023\justBeforeYear2023\WebViewExamples\src\main\java\com\example\webviewexamples" />
@@ -190,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673191220740</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Improve menu items with less animation timing.">
+      <created>1673309218369</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1673309218369</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,7 +246,8 @@
     <MESSAGE value="Added clarification in comment. Redesigned Dimens.java, improved comments and improved Door.java file(see changes)." />
     <MESSAGE value="Removed animations for menu items from doorAnimations.java file and add two circles for refresh button and bookmark button." />
     <MESSAGE value="Improved Comments and some warnings suppressed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved Comments and some warnings suppressed." />
+    <MESSAGE value="Improve menu items with less animation timing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve menu items with less animation timing." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

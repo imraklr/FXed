@@ -1,16 +1,14 @@
 package com.example.webviewexamples;
 
+import TabsManager.Tabs;
 import animations.doorAnimations;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -19,32 +17,37 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import tabs.Tabs;
 import watchers.dimens.Dimens;
 import watchers.dimens.Drags;
 
 import java.io.File;
-import java.util.Collection;
 
 public class Door extends Application {
     private Stage primaryStage;
     private static StackPane parent;
     private Rectangle m_strip; // menu_strip
-    private Circle new_page, new_page_effect_circle,
-            bookmarks, bookmarks_effect_circle,
-            refresh, refresh_effect_circle,
-            backward, backward_effect_circle,
-            forward, forward_effect_circle,
-            close_page, close_page_effect_circle;
+    int currTab = 0;
     private Label new_page_label, bookmarks_label, refresh_label, close_page_label, forward_label, backward_label;
     private Rectangle cover_util;
     private Rectangle minimize, maximize, close;
+    private Circle new_page, new_page_effect_circle, bookmarks, bookmarks_effect_circle, refresh, refresh_effect_circle,
+            backward, backward_effect_circle, forward, forward_effect_circle, close_page, close_page_effect_circle;
 
     public Door() {
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+    private Tabs tabs;
+
+    private Parent createContent() {
+        // Assume parent node to be a StackPane
+        StackPane pane = new StackPane();
+        pane.setAlignment(Pos.TOP_LEFT);
+        // Get the designed Door
+        parent = designDoor(pane);
+        return pane;
     }
 
     @Override
@@ -58,14 +61,15 @@ public class Door extends Application {
 
         this.primaryStage = primaryStage;
         Scene sc = new Scene(createContent());
+        onSceneAttached();
         sc.setFill(Color.TRANSPARENT);
         File f = new File("src/main/resources/com/example/webviewexamples/stylesheets/doorDecoration.css");
         sc.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
         primaryStage.setScene(sc);
         primaryStage.show();
-        // Resizer goes here for primary stage
 
+        // Resizer goes here for primary stage
 
         // Attach dimension class to nodes
         try {
@@ -79,41 +83,12 @@ public class Door extends Application {
         doDynamics();
     }
 
-    private Parent createContent() {
-        // Assume parent node to be a StackPane
-        StackPane pane = new StackPane();
-        pane.setAlignment(Pos.TOP_LEFT);
-        // Get the designed Door
-        parent = designDoor(pane);
-        // Get all nodes for scene
-        Collection<Node> collected = Tabs.get(1);
-        // TODO: Improve ERROR dialog
-        if (collected == null) {
-            GridPane gridPane = new GridPane();
-            Label label = new Label();
-            label.setText("ERROR: WINDOW CREATION FAILED");
-            Button exit = new Button("EXIT");
-            exit.setOnMouseClicked(e -> {
-                // shutdown all threads before leaving and save any unsaved work
-                primaryStage.close();
-            });
-            gridPane.setStyle("-fx-alignment: CENTER;" +
-                    "");
-            gridPane.add(label, 0, 0);
-            gridPane.add(exit, 4, 11);
-
-            return gridPane;
-        }
-        pane.getChildren().addAll(8, collected);
-        return pane;
-    }
-
     private StackPane designDoor(StackPane pane) {
-        // Decorations:
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
 
+        // Decorations:
         // menu_strip decorations
         {
-            Rectangle2D screenBounds = Screen.getPrimary().getBounds();
             Rectangle menuStrip = new Rectangle(screenBounds.getMaxX(), screenBounds.getMaxY() / 30);
             m_strip = menuStrip;
             menuStrip.setId("menu_strip");
@@ -240,7 +215,6 @@ public class Door extends Application {
             pane.getChildren().add(19, bookmarks_effect_circle);
             pane.getChildren().add(20, bookmarks_label);
             pane.getChildren().add(21, bookmarks);
-
         }
         return pane;
     }
@@ -296,6 +270,11 @@ public class Door extends Application {
         new doorAnimations(cover_util, minimize, maximize, close);
     }
 
+    private void onSceneAttached() {
+        tabs = new Tabs(getParent());
+        tabs.create();
+    }
+
     private void attachDoorEvents() {
         final FadeTransition[] fadeTransitions = new FadeTransition[6];
         new_page.setOnMouseEntered(e -> {
@@ -305,6 +284,7 @@ public class Door extends Application {
             fadeTransitions[0].play();
         });
         new_page.setOnMouseClicked(e -> {
+            // Whenever this event occurs, a default Home page tab must be added.
             fadeTransitions[0] = new FadeTransition(Duration.seconds(.45), new_page_effect_circle);
             // Perform some action and opacity restoration
             fadeTransitions[0].setFromValue(new_page_effect_circle.getOpacity());
@@ -345,7 +325,7 @@ public class Door extends Application {
             fadeTransitions[2].play();
         });
         refresh.setOnMouseClicked(e -> {
-            fadeTransitions[2] = new FadeTransition(Duration.seconds(.45), refresh_effect_circle);
+            // refresh the current page on current tab
             // Perform some action and opacity restoration
             fadeTransitions[2].setFromValue(refresh_effect_circle.getOpacity());
             fadeTransitions[2].setToValue(.2);
