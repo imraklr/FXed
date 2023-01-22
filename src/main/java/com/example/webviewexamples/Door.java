@@ -1,7 +1,7 @@
 package com.example.webviewexamples;
 
 import TabsManager.Tabs;
-import animations.doorAnimations;
+import animations.DoorAnimations;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -265,9 +265,9 @@ public class Door extends Application {
     private void doDynamics() {
         new Drags(m_strip, primaryStage);
 
-        new doorAnimations(m_strip, "");
+        new DoorAnimations(m_strip, "");
 
-        new doorAnimations(cover_util, minimize, maximize, close);
+        new DoorAnimations(cover_util, minimize, maximize, close);
     }
 
     private void onSceneAttached() {

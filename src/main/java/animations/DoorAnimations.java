@@ -1,7 +1,6 @@
 package animations;
 
-import javafx.animation.FillTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -13,10 +12,10 @@ import javafx.util.Duration;
 
 import java.util.LinkedList;
 
-public class doorAnimations {
+public class DoorAnimations {
     private String MESSAGE;
 
-    public doorAnimations(Rectangle menu_strip, String msg) {
+    public DoorAnimations(Rectangle menu_strip, String msg) {
         MESSAGE = msg;
         animate(menu_strip, MESSAGE);
     }
@@ -24,14 +23,14 @@ public class doorAnimations {
     private double[] xOffset_mouseEvent, yOffset_mouseEvent, zOffset_mouseEvent;
     private int i = -1;
 
-    public doorAnimations(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
+    public DoorAnimations(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
         MESSAGE = "";
         animate(cover_util, min, max, close);
     }
 
     // Extra method for general use
     @SuppressWarnings("unused")
-    public doorAnimations(Node... v) {
+    public DoorAnimations(Node... v) {
         xOffset_mouseEvent = new double[v.length];
         yOffset_mouseEvent = new double[v.length];
         zOffset_mouseEvent = new double[v.length];
@@ -285,7 +284,67 @@ public class doorAnimations {
         }
     }
 
-    @SuppressWarnings("unused")
     public static void animate(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
+        // Transition types required
+        final TranslateTransition[] translateTransitions = new TranslateTransition[4];
+        final ScaleTransition[] scaleTransitions = new ScaleTransition[4];
+        final ParallelTransition[] parallelTransition = new ParallelTransition[1];
+        final RotateTransition[] rotateTransitions = new RotateTransition[2];
+
+        final double init_width__cover_util = cover_util.getWidth();
+        final double init_width__min = min.getWidth();
+        final double init_width__max = max.getWidth();
+        final double init_width__close = close.getWidth();
+
+        final double init_translateY__max = max.getTranslateY();
+
+        final double slideTo__cover_util = cover_util.getTranslateX() - 3.0 * init_width__cover_util;
+        final double slideTo__min = min.getTranslateX() - 8.0 * init_width__min;
+        final double slideTo__max = max.getTranslateX() - 4.0 * init_width__max;
+        final double slideTo__close = close.getTranslateX() - init_width__close;
+
+        // Scale cover_util
+        scaleTransitions[0] = new ScaleTransition(Duration.seconds(.75), cover_util);
+        scaleTransitions[0].setToX(7.0);
+        translateTransitions[0] = new TranslateTransition(Duration.seconds(.75), cover_util);
+        // translate to left
+        translateTransitions[0].setToX(slideTo__cover_util);
+
+        // Scale min rectangle
+        scaleTransitions[1] = new ScaleTransition(Duration.seconds(.75), min);
+        scaleTransitions[1].setToX(3.0);
+        scaleTransitions[1].setToY(min.getParent().getChildrenUnmodifiable().get(0).getLayoutBounds().getHeight() / 4);
+        // translate left
+        translateTransitions[1] = new TranslateTransition(Duration.seconds(.75), min);
+        translateTransitions[1].setToX(slideTo__min);
+        // rotate to 0 deg
+        rotateTransitions[0] = new RotateTransition(Duration.seconds(.75), min);
+        rotateTransitions[0].setToAngle(0);
+
+        // Scale max rectangle
+        scaleTransitions[2] = new ScaleTransition(Duration.seconds(.75), max);
+        scaleTransitions[2].setToX(3.0);
+        scaleTransitions[2].setToY(max.getParent().getChildrenUnmodifiable().get(0).getLayoutBounds().getHeight() / 4);
+        // translate left
+        translateTransitions[2] = new TranslateTransition(Duration.seconds(.75), max);
+        translateTransitions[2].setToX(slideTo__max);
+        translateTransitions[2].setToY(min.getTranslateY());
+
+        // Scale close rectangle
+        scaleTransitions[3] = new ScaleTransition(Duration.seconds(.75), close);
+        scaleTransitions[3].setToX(3.0);
+        scaleTransitions[3].setToY(close.getParent().getChildrenUnmodifiable().get(0).getLayoutBounds().getHeight() / 4);
+        // translate left
+        translateTransitions[3] = new TranslateTransition(Duration.seconds(.75), close);
+        translateTransitions[3].setToX(slideTo__close);
+        // rotate to 0 deg
+        rotateTransitions[1] = new RotateTransition(Duration.seconds(.75), close);
+        rotateTransitions[1].setToAngle(0);
+
+        parallelTransition[0] = new ParallelTransition(translateTransitions[0], translateTransitions[1],
+                translateTransitions[2],
+                scaleTransitions[0], scaleTransitions[1], scaleTransitions[2], scaleTransitions[3],
+                rotateTransitions[0], rotateTransitions[1]);
+        parallelTransition[0].play();
     }
 }
