@@ -4,6 +4,7 @@ import TabsManager.Tabs;
 import animations.DoorAnimations;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -28,7 +29,6 @@ public class Door extends Application {
     private Rectangle m_strip; // menu_strip
     int currTab = 0;
     private Label new_page_label, bookmarks_label, refresh_label, close_page_label, forward_label, backward_label;
-    private Rectangle cover_util;
     private Rectangle minimize, maximize, close;
     private Circle new_page, new_page_effect_circle, bookmarks, bookmarks_effect_circle, refresh, refresh_effect_circle,
             backward, backward_effect_circle, forward, forward_effect_circle, close_page, close_page_effect_circle;
@@ -96,15 +96,10 @@ public class Door extends Application {
         }
         // Provide a transparent rectangle which covers on which if mouse drag if available expands to animate
         // recent, min, max, close buttons(rectangles)
-        cover_util = new Rectangle();
-        cover_util.setId("menu_strip_cover_util");
         // min_max_close buttons(clickable rectangles)
         {
             double recent_width = m_strip.getWidth() / 180 + 5;
             double recent_height = m_strip.getHeight() / 20;
-            cover_util.setWidth(recent_width + recent_width / 2);
-            cover_util.setHeight(recent_width * 2);
-            pane.getChildren().add(1, cover_util);
             double recent_arc_height = 10 * recent_height / 2;
             double recent_arc_width = 10 * recent_height / 2;
             minimize = new Rectangle(recent_width, recent_height); // angle = -60
@@ -120,9 +115,9 @@ public class Door extends Application {
             close.setArcWidth(recent_arc_width);
             close.setId("closeBtn");
 
-            pane.getChildren().add(2, minimize);
-            pane.getChildren().add(3, maximize);
-            pane.getChildren().add(4, close);
+            pane.getChildren().add(1, minimize);
+            pane.getChildren().add(2, maximize);
+            pane.getChildren().add(3, close);
         }
         // place activity buttons
         {
@@ -137,9 +132,9 @@ public class Door extends Application {
             new_page_label = new Label("+");
             new_page_label.setScaleX(new_page.getRadius() / 5.0);
             new_page_label.setScaleY(new_page.getRadius() / 5.0);
-            pane.getChildren().add(5, new_page_effect_circle);
-            pane.getChildren().add(6, new_page_label);
-            pane.getChildren().add(7, new_page);
+            pane.getChildren().add(4, new_page_effect_circle);
+            pane.getChildren().add(5, new_page_label);
+            pane.getChildren().add(6, new_page);
 
             refresh = new Circle(m_strip.getHeight() / 2.5);
             refresh.setFill(Color.web("#FFFFFF"));
@@ -152,9 +147,9 @@ public class Door extends Application {
             refresh_label = new Label("↻");
             refresh_label.setScaleX(refresh.getRadius() / 6.0);
             refresh_label.setScaleY(refresh.getRadius() / 7.0);
-            pane.getChildren().add(8, refresh_effect_circle);
-            pane.getChildren().add(9, refresh_label);
-            pane.getChildren().add(10, refresh);
+            pane.getChildren().add(7, refresh_effect_circle);
+            pane.getChildren().add(8, refresh_label);
+            pane.getChildren().add(9, refresh);
 
             close_page = new Circle(m_strip.getHeight() / 2.5);
             close_page.setFill(Color.web("#FFFFFF"));
@@ -167,9 +162,9 @@ public class Door extends Application {
             close_page_label = new Label("✘");
             close_page_label.setScaleX(close_page.getRadius() / 7.0);
             close_page_label.setScaleY(close_page.getRadius() / 8.0);
-            pane.getChildren().add(11, close_page_effect_circle);
-            pane.getChildren().add(12, close_page_label);
-            pane.getChildren().add(13, close_page);
+            pane.getChildren().add(10, close_page_effect_circle);
+            pane.getChildren().add(11, close_page_label);
+            pane.getChildren().add(12, close_page);
 
             forward = new Circle(m_strip.getHeight() / 2.5);
             forward.setFill(Color.web("#FFFFFF"));
@@ -227,7 +222,6 @@ public class Door extends Application {
         new Dimens(minimize, frame, 0, 0, 0, 0, -60, 0, 0, 0, m_strip.getHeight() / 2, m_strip.getWidth() - minimize.getWidth() * 2, 0, 0);
         new Dimens(maximize, frame, ((Math.sqrt(3) * maximize.getWidth()) / 4), 0, 0, ((1 * maximize.getWidth()) / 4), 0, 0, 0, 0, 0, 0, 0, 0);
         new Dimens(close, frame, 0, 0, 0, close.getWidth() / 2, 60, 0, 0, 0, 0, 0, 0, 0);
-        new Dimens(cover_util, frame, -(m_strip.getHeight() - ((Math.sqrt(3) * maximize.getWidth()) / 1.4)), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         frame.arrange();
 
         // Do frame = new Dimens(); to start with another framing iff you don't require previous frame or if there are
@@ -267,7 +261,7 @@ public class Door extends Application {
 
         new DoorAnimations(m_strip, "");
 
-        new DoorAnimations(cover_util, minimize, maximize, close);
+        new DoorAnimations(minimize, maximize, close);
     }
 
     private void onSceneAttached() {
@@ -276,6 +270,16 @@ public class Door extends Application {
     }
 
     private void attachDoorEvents() {
+        // min, max and close functionalities
+        minimize.setOnMouseClicked(mouseEvent -> primaryStage.setIconified(true));
+        maximize.setOnMouseClicked(mouseEvent -> {
+            // fill screen
+            primaryStage.setFullScreenExitHint("PRESS ESC TO RESTORE SIZE.");
+            primaryStage.setFullScreen(true);
+        });
+        close.setOnMouseClicked(mouseEvent -> Platform.exit());
+
+        // menu items events
         final FadeTransition[] fadeTransitions = new FadeTransition[6];
         new_page.setOnMouseEntered(e -> {
             fadeTransitions[0] = new FadeTransition(Duration.seconds(.45), new_page_effect_circle);

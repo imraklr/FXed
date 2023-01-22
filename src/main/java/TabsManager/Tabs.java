@@ -19,6 +19,7 @@ import javafx.util.Duration;
 @SuppressWarnings("unused")
 public class Tabs extends GridPane {
     private final StackPane parent;
+    private final Rectangle menu_strip;
     private final double initExtendX, initExtendY;
     private final Rectangle2D screenBounds;
     private final Bounds rootBounds;
@@ -36,6 +37,7 @@ public class Tabs extends GridPane {
         super.setTranslateY(parent.getChildrenUnmodifiable().get(0).getLayoutBounds().getHeight());
         super.setStyle("-fx-background-color: #982342;");
         this.parent = parent;
+        menu_strip = (Rectangle) parent.getChildren().get(0);
         rootBounds = parent.getScene().getRoot().getLayoutBounds();
         initExtendY = parent.getChildren().get(0).getLayoutBounds().getHeight();
         initExtendX = parent.getChildren().get(0).getLayoutBounds().getWidth();
@@ -58,11 +60,11 @@ public class Tabs extends GridPane {
         // Check for page errors/load problems
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.FAILED)
-                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "FAILED");
+                DoorAnimations.animate(menu_strip, "FAILED");
             else if (newValue == Worker.State.CANCELLED)
-                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "CANCELLED");
+                DoorAnimations.animate(menu_strip, "CANCELLED");
             else if (newValue == Worker.State.SUCCEEDED)
-                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "SUCCEEDED");
+                DoorAnimations.animate(menu_strip, "SUCCEEDED");
         });
         webEngine.load(URL);
         webEngine.setJavaScriptEnabled(true);
@@ -80,11 +82,11 @@ public class Tabs extends GridPane {
         // Check for page errors/load problems
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.FAILED)
-                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "FAILED");
+                DoorAnimations.animate(menu_strip, "FAILED");
             else if (newValue == Worker.State.CANCELLED)
-                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "CANCELLED");
+                DoorAnimations.animate(menu_strip, "CANCELLED");
             else if (newValue == Worker.State.SUCCEEDED)
-                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "SUCCEEDED");
+                DoorAnimations.animate(menu_strip, "SUCCEEDED");
         });
         webEngine.load("https://openai.com/blog/chatgpt/");
         webEngine.setJavaScriptEnabled(true);
