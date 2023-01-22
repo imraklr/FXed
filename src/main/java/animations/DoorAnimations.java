@@ -260,31 +260,42 @@ public class DoorAnimations {
                             new Stop(.5, Color.web("#000000")),
                             new Stop(.75, Color.web("#ff5203")),
                             new Stop(1., Color.web("#edc187"))));
-            case "ERROR" -> {
+            case "FAILED" -> {
                 ft = new FillTransition(Duration.millis(1300), menu_strip,
-                        Color.web("#ff0000"), Color.web("#e38f8f"));
-                ft.setCycleCount(1);
+                        Color.web("#ff0000FF"), Color.web("#e38f8fFF"));
+                ft.setRate(.8);
+                ft.setCycleCount(4);
                 ft.setAutoReverse(true);
                 ft.play();
-                ft.setOnFinished(e -> menu_strip.setFill(new LinearGradient(0.0, 1.0, 1.0, 1.0, true, CycleMethod.NO_CYCLE,
-                        new Stop(0.0, Color.web("#0eed89")),
-                        new Stop(1.0, Color.web("#f01394")))));
+                ft.setOnFinished(e -> animate(menu_strip, ""));
             }
-            case "WARNING" -> {
+            case "CANCELLED" -> {
                 // For example expired certificate
                 ft = new FillTransition(Duration.millis(1500), menu_strip,
-                        Color.web("#edca18"), Color.web("#f0da6e"));
-                ft.setCycleCount(1);
+                        Color.web("#edca18FF"), Color.web("#f0da6eFF"));
+                ft.setRate(.8);
+                ft.setCycleCount(4);
                 ft.setAutoReverse(true);
                 ft.play();
-                ft.setOnFinished(e -> menu_strip.setFill(new LinearGradient(0.0, 1.0, 1.0, 1.0, true, CycleMethod.NO_CYCLE,
-                        new Stop(0.0, Color.web("#0eed89")),
-                        new Stop(1.0, Color.web("#f01394")))));
+                ft.setOnFinished(e -> animate(menu_strip, ""));
+            }
+            case "SUCCEEDED" -> {
+                ft = new FillTransition(Duration.millis(1500), menu_strip,
+                        Color.web("#00FFCCFF"), Color.web("#00FF55FF"));
+                ft.setRate(.8);
+                ft.setCycleCount(4);
+                ft.setAutoReverse(true);
+                ft.play();
+                ft.setOnFinished(e -> animate(menu_strip, ""));
             }
         }
     }
 
     public static void animate(Rectangle cover_util, Rectangle min, Rectangle max, Rectangle close) {
+        /*
+         * Following final variables may be useful in the future versions, so it is marked  for maintenance check
+         */
+
         // Transition types required
         final TranslateTransition[] translateTransitions = new TranslateTransition[4];
         final ScaleTransition[] scaleTransitions = new ScaleTransition[4];
@@ -295,8 +306,6 @@ public class DoorAnimations {
         final double init_width__min = min.getWidth();
         final double init_width__max = max.getWidth();
         final double init_width__close = close.getWidth();
-
-        final double init_translateY__max = max.getTranslateY();
 
         final double slideTo__cover_util = cover_util.getTranslateX() - 3.0 * init_width__cover_util;
         final double slideTo__min = min.getTranslateX() - 8.0 * init_width__min;

@@ -1,13 +1,16 @@
 package TabsManager;
 
+import animations.DoorAnimations;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ListChangeListener;
+import javafx.concurrent.Worker;
 import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
@@ -52,6 +55,15 @@ public class Tabs extends GridPane {
         webView.setMaxHeight(Screen.getPrimary().getVisualBounds().getMaxY() - 30 - parent.getChildren().get(0).getLayoutBounds().getHeight());
         webView.setTranslateY(parent.getChildren().get(0).getLayoutBounds().getHeight() + 30);
         WebEngine webEngine = webView.getEngine();
+        // Check for page errors/load problems
+        webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == Worker.State.FAILED)
+                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "FAILED");
+            else if (newValue == Worker.State.CANCELLED)
+                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "CANCELLED");
+            else if (newValue == Worker.State.SUCCEEDED)
+                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "SUCCEEDED");
+        });
         webEngine.load(URL);
         webEngine.setJavaScriptEnabled(true);
         parent.getChildren().add(23, webView);
@@ -65,16 +77,16 @@ public class Tabs extends GridPane {
         webView.setMaxHeight(Screen.getPrimary().getVisualBounds().getMaxY() - 30 - parent.getChildren().get(0).getLayoutBounds().getHeight());
         webView.setTranslateY(parent.getChildren().get(0).getLayoutBounds().getHeight() + 30);
         WebEngine webEngine = webView.getEngine();
-//        webEngine.load("https://openai.com/blog/chatgpt/");
-        webEngine.loadContent("" +
-                "<html>" +
-                "<head>" +
-                "   <title>Meows</title>" +
-                "</head>" +
-                "<body bgcolor=\"#000000\">" +
-                "   <font size=\"44\" color=\"green\">Love is needed. It's not something that someone deserves or do not deserve.</font>" +
-                "</body>" +
-                "</html>");
+        // Check for page errors/load problems
+        webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == Worker.State.FAILED)
+                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "FAILED");
+            else if (newValue == Worker.State.CANCELLED)
+                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "CANCELLED");
+            else if (newValue == Worker.State.SUCCEEDED)
+                DoorAnimations.animate((Rectangle) parent.getChildren().get(0), "SUCCEEDED");
+        });
+        webEngine.load("https://openai.com/blog/chatgpt/");
         webEngine.setJavaScriptEnabled(true);
         parent.getChildren().add(23, webView);
     }
